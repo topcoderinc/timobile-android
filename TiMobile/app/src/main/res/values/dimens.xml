@@ -1,0 +1,105 @@
+<resources>
+    <dimen name="text_x">8sp</dimen>
+    <dimen name="text_10x8">10sp</dimen>
+    <dimen name="text_3x2">12sp</dimen>
+    <dimen name="text_normal">14sp</dimen>
+    <dimen name="text_2x">16sp</dimen>
+    <dimen name="text_2x2">17sp</dimen>
+    <dimen name="text_5x2">20sp</dimen>
+    <dimen name="text_3x">24sp</dimen>
+    <dimen name="text_extra_large">28sp</dimen>
+    <dimen name="text_title">30sp</dimen>
+    <dimen name="text_9x2">36sp</dimen>
+    <dimen name="text_9x4">18sp</dimen>
+    <dimen name="text_15x8">15sp</dimen>
+
+
+    <dimen name="padding_x2_n">-4dp</dimen>
+    <dimen name="padding_x2">4dp</dimen>
+    <dimen name="padding_x">8dp</dimen>
+    <dimen name="padding_2x">16dp</dimen>
+    <dimen name="padding_3x">24dp</dimen>
+    <dimen name="padding_3x2">12dp</dimen>
+    <dimen name="padding_4x">32dp</dimen>
+    <dimen name="padding_6x">48dp</dimen>
+
+    <dimen name="margin_x2_n">-4dp</dimen>
+    <dimen name="margin_x2">4dp</dimen>
+    <dimen name="margin_x">8dp</dimen>
+    <dimen name="margin_2x">16dp</dimen>
+    <dimen name="margin_2x2">20dp</dimen>
+    <dimen name="margin_3x">24dp</dimen>
+    <dimen name="margin_3x2">12dp</dimen>
+    <dimen name="margin_4x">32dp</dimen>
+    <dimen name="margin_8x">64dp</dimen>
+    <dimen name="margin_3x4">6dp</dimen>
+    <dimen name="margin_5x4">10dp</dimen>
+    <dimen name="button_margin">100dp</dimen>
+
+    <dimen name="width_3x">24dp</dimen>
+    <dimen name="height_3x">24dp</dimen>
+    <dimen name="width_4x">32dp</dimen>
+    <dimen name="height_4x">32dp</dimen>
+    <dimen name="row_height_8x">64dp</dimen>
+    <dimen name="padding_8x">64dp</dimen>
+    <dimen name="notification_icon_dimens">8dp</dimen>
+    <dimen name="padding_0">0dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="message_profile_image_size">32dp</dimen>
+    <dimen name="new_indicator_size">12dp</dimen>
+    <dimen name="icon_width">24dp</dimen>
+    <dimen name="icon_height">24dp</dimen>
+    <dimen name="text_17">17sp</dimen>
+    <dimen name="avatar_width">88dp</dimen>
+    <dimen name="avatar_height">88dp</dimen>
+    <dimen name="avatar_container_width">96dp</dimen>
+    <dimen name="separator_height">1dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="margin_10x">80dp</dimen>
+    <dimen name="roadmap_layout_height">160dp</dimen>
+    <dimen name="upcoming_news_tv_size">20dp</dimen>
+    <dimen name="upcoming_activitiy_text_font_size">15sp</dimen>
+    <dimen name="upcoming_activity_image_height">152dp</dimen>
+    <dimen name="upcoming_activities_time_height">20dp</dimen>
+    <dimen name="upcoming_activity_text_ll_height">88dp</dimen>
+    <dimen name="margin_5x2">20dp</dimen>
+    <dimen name="upcoming_activity_view_pager_height">240dp</dimen>
+    <dimen name="cell_height">60dp</dimen>
+    <dimen name="margin_56">56dp</dimen>
+    <dimen name="margin_1x5">12dp</dimen>
+    <dimen name="text_15">15sp</dimen>
+    <dimen name="margin_28">28dp</dimen>
+    <dimen name="list_item_corner_radius">6dp</dimen>
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="margin_5x">40dp</dimen>
+
+    <dimen name="text_13">13sp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="iv_arrow_width">30dp</dimen>
+    <dimen name="iv_arrow_height">30dp</dimen>
+    <dimen name="team_profile_image_size">40dp</dimen>
+
+    <dimen name="tick_icon_image_size">20dp</dimen>
+    <dimen name="user_profile_avatar_width">96dp</dimen>
+    <dimen name="user_profile_avatar_height">96dp</dimen>
+    <dimen name="margin_7x">56dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="progress_view_size">60dp</dimen>
+    <dimen name="progress_view_small_size">40dp</dimen>
+    <dimen name="margin_29">29dp</dimen>
+    <dimen name="margin_11">11dp</dimen>
+    <dimen name="swipe_layout_width">96dp</dimen>
+    <dimen name="colorful_circle_height">16dp</dimen>
+    <dimen name="margin_x4">2dp</dimen>
+    <dimen name="padding_5x2">20dp</dimen>
+    <dimen name="margin_22">22dp</dimen>
+    <dimen name="width_8">8dp</dimen>
+    <dimen name="height_14">14dp</dimen>
+    <dimen name="margin_6">6dp</dimen>
+
+    <integer name="animation_duration">350</integer>
+</resources>

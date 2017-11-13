@@ -1,0 +1,117 @@
+apply plugin: 'com.android.application'
+
+android {
+  compileSdkVersion 26
+  buildToolsVersion '26.0.2'
+  final API_URL_DEV = "https://bookstore-mb.herokuapp.com/"
+  defaultConfig {
+    applicationId "com.topcoder.timobile"
+    minSdkVersion 23
+    targetSdkVersion 26
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  signingConfigs {
+    release {
+      storeFile file("../keystore.jks")
+      storePassword "topcoder"
+      keyAlias "timobile"
+      keyPassword "topcoder"
+    }
+  }
+  buildTypes {
+    debug {
+      applicationIdSuffix '.debug'
+      minifyEnabled false
+      buildConfigField 'String', 'API_URL', "\"" + API_URL_DEV + "\""
+    }
+    release {
+      buildConfigField 'String', 'API_URL', "\"" + API_URL_DEV + "\""
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.release
+    }
+  }  
+}
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  androidTestCompile "com.android.support:support-annotations:26.1.0"
+  androidTestCompile 'com.android.support.test:runner:1.0.1'
+  androidTestCompile 'com.android.support.test:rules:1.0.1'
+  androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+  androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.mockito:mockito-core:2.7.0'
+
+  compile "com.android.support:appcompat-v7:26.1.0"
+  compile "com.android.support:recyclerview-v7:26.1.0"
+  compile "com.android.support:cardview-v7:26.1.0"
+  compile "com.android.support:support-annotations:26.1.0"
+  compile "com.android.support:design:26.1.0"
+  compile 'com.google.android.gms:play-services-maps:11.4.2'
+  //logging
+  compile "com.jakewharton.timber:timber:4.5.1"
+  //view binding
+  compile("com.jakewharton:butterknife:8.8.1") {
+    exclude module: "support-annotations"
+  }
+  annotationProcessor "com.jakewharton:butterknife-compiler:8.8.1"
+  // runtime permission
+  compile("com.karumi:dexter:4.1.0") {
+    exclude module: "support-annotations"
+  }
+  //pager indicator
+  compile "me.relex:circleindicator:1.2.2@aar"
+  //dimen
+  compile "com.intuit.sdp:sdp-android:1.0.4"
+  compile "com.intuit.ssp:ssp-android:1.0.4"
+  //utils
+  compile "com.blankj:utilcode:1.9.6"
+  //apache common utils
+  compile "org.apache.commons:commons-collections4:4.1"
+
+  //View Animator
+  compile 'com.github.florent37:viewanimator:1.0.5'
+  //custom font
+  compile 'uk.co.chrisjenx:calligraphy:2.3.0'
+  provided 'org.glassfish:javax.annotation:10.0-b28'
+  //glide
+  compile 'com.github.bumptech.glide:glide:4.2.0'
+  annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+  compile 'com.github.bumptech.glide:okhttp3-integration:4.2.0'
+
+  //lombok
+  provided 'org.projectlombok:lombok:1.12.6'
+  annotationProcessor 'org.projectlombok:lombok:1.12.6'
+
+  //reactive
+  compile("io.reactivex.rxjava2:rxandroid:2.0.1") {
+    exclude module: "rxjava"
+  }
+  compile "com.google.dagger:dagger:2.11"
+  annotationProcessor "com.google.dagger:dagger-compiler:2.11"
+  compile "io.reactivex.rxjava2:rxjava:2.1.3"
+  //Network
+  compile "com.squareup.retrofit2:retrofit:2.3.0"
+  compile "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
+  compile("com.squareup.retrofit2:converter-gson:2.3.0") {
+    exclude module: 'gson'
+  }
+  compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+  compile "com.google.code.gson:gson:2.8.1"
+  compile 'de.hdodenhof:circleimageview:2.2.0'
+  compile 'com.github.marlonlom:timeago:3.0.1'
+  compile project(':cameraview')
+  compile 'com.afollestad:easyvideoplayer:0.3.0'
+  compile 'org.greenrobot:eventbus:3.0.0'
+  testCompile 'junit:junit:4.12'
+}

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_180sdp"
+        >
+      <ImageView
+          android:id="@+id/imgStory"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:adjustViewBounds="true"
+          android:scaleType="fitXY"
+          android:src="@drawable/ic_browse_ph"
+          />
+      <ImageView
+          android:id="@+id/imgBack"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/_10sdp"
+          android:padding="@dimen/_5sdp"
+          android:src="@drawable/ic_back"
+          />
+
+
+      <ImageView
+          android:id="@+id/imgBookmark"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_margin="@dimen/_10sdp"
+          android:padding="@dimen/_5sdp"
+          android:src="@drawable/ic_bookmark"
+
+          />
+
+      <TextView
+          android:id="@+id/tvTitle"
+          android:layout_width="@dimen/_150sdp"
+          android:layout_height="wrap_content"
+          android:layout_centerInParent="true"
+          android:gravity="center"
+          android:text="@string/story_title_lorem_ipsum_dolor_sit_amet"
+          android:textColor="@color/white"
+          style="@style/BoldFont"
+          />
+
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tvTitle"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="@dimen/_15sdp"
+          android:orientation="horizontal"
+          >
+
+        <TextView
+            android:id="@+id/tvChapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_chapter_white"
+            android:drawablePadding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8ssp"
+            tools:text="4 chapters"
+            />
+
+        <TextView
+            android:id="@+id/tvCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:drawableLeft="@drawable/ic_gift_white"
+            android:drawablePadding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8ssp"
+            tools:text="2 cards"
+            />
+
+
+      </LinearLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/linearStoryProgress"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/heavy_orange"
+        >
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
+          android:layout_marginLeft="@dimen/_10sdp"
+          android:layout_weight="1"
+          android:text="@string/track_story_progress"
+          android:textColor="@color/white"
+          style="@style/SemiBoldFont"
+          />
+
+      <ImageView
+          android:id="@+id/imgArrow"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="end|center_vertical"
+          android:layout_marginRight="@dimen/_10sdp"
+          android:padding="@dimen/_5sdp"
+          android:src="@drawable/ic_down"
+          />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/_10sdp"
+          android:text="@string/summary"
+          android:textColor="@color/dark_gray"
+          android:textSize="12sp"
+          style="@style/SemiBoldFont"
+          />
+
+      <com.topcoder.timobile.customviews.ReadMoreTextView
+          android:id="@+id/tvDescription"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/_10sdp"
+          android:layout_marginRight="@dimen/_10sdp"
+          android:textColor="@color/dark_gray"
+          android:textSize="12sp"
+          app:colorClickableText="@color/blue_indicator"
+          app:trimLength="140"
+          app:trimMode="trimModeLength"
+          tools:text="Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam quis nostrud exerci tation ullamcorper suscipit lo"
+          />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:layout_marginTop="@dimen/_15sdp"
+          android:background="@color/divider"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/_10sdp"
+          android:text="@string/tags"
+          android:textColor="@color/dark_gray"
+          android:textSize="12sp"
+          style="@style/SemiBoldFont"
+          />
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/recyclerViewTags"
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/_40sdp"
+          android:layout_marginLeft="@dimen/_10sdp"
+          android:layout_marginRight="@dimen/_10sdp"
+          />
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:layout_marginTop="@dimen/_15sdp"
+          android:background="@color/divider"
+          />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/_10sdp"
+          android:text="@string/rewards"
+          android:textColor="@color/dark_gray"
+          android:textSize="12sp"
+          style="@style/SemiBoldFont"
+          />
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/recyclerViewRewards"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/_10sdp"
+          android:layout_marginRight="@dimen/_10sdp"
+          />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:layout_marginTop="@dimen/_15sdp"
+          android:background="@color/divider"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="@dimen/_10sdp"
+          android:text="@string/additional_reward"
+          android:textColor="@color/dark_gray"
+          android:textSize="12sp"
+          style="@style/SemiBoldFont"
+          />
+
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/_10sdp"
+          android:layout_marginRight="@dimen/_10sdp"
+          android:gravity="center_vertical"
+          >
+
+        <ImageView
+            android:id="@+id/imgCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_camera"
+            />
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_toRightOf="@id/imgCamera"
+            android:orientation="vertical"
+            >
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/selfie_up"
+              android:textColor="@color/dark_gray"
+              android:textSize="12sp"
+              style="@style/BoldFont"
+              />
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/_5sdp"
+              android:text="@string/selfie_text"
+              android:textColor="@color/dark_gray"
+              android:textSize="10sp"
+              />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvRewardPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:drawableLeft="@drawable/ic_points"
+            android:drawablePadding="@dimen/_5sdp"
+            android:textColor="@color/dark_gray"
+            android:textSize="12sp"
+            tools:text="30 pts"
+            style="@style/BoldFont"
+            />
+
+        <TextView
+            android:id="@+id/tvTakeSelfie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvRewardPoints"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/blue_border"
+            android:padding="@dimen/_5sdp"
+            android:text="@string/take_a_selfie"
+            android:textColor="@color/blue_indicator"
+            android:textSize="12sp"
+            />
+
+      </RelativeLayout>
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:layout_marginTop="@dimen/_15sdp"
+          android:background="@color/divider"
+          />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/heavy_orange"
+          android:orientation="vertical"
+          >
+        <SeekBar
+            android:id="@+id/storyProgressBar"
+            style="@style/SeekBarStyle"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="You need to finish 5 chapters more to unlock the rewards"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            />
+      </LinearLayout>
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/recyclerViewChapter"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCollectRewards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@color/disable_color"
+        android:text="@string/collect_rewards"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:enabled="false"
+        style="@style/SemiBoldFont"
+        />
+  </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

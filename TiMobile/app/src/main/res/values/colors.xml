@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#3d006b</color>
+  <color name="colorPrimaryDark">#3d006b</color>
+  <color name="colorAccent">#FFF</color>
+  <color name="white">#fff</color>
+  <color name="blue_indicator">#408ed8</color>
+  <color name="gray_indicator">#b3b8bb</color>
+  <color name="violet">#3d589b</color>
+  <color name="purple">#3d006b</color>
+  <color name="orange">#d87b28</color>
+  <color name="yellow">#ffdf32</color>
+  <color name="red">#ff5050</color>
+  <color name="dark_gray">#484848</color>
+  <color name="light_gray">#676767</color>
+  <color name="hint_color">#b8b8b8</color>
+  <color name="section">#ececec</color>
+  <color name="divider">#cccccc</color>
+  <color name="dark_purple">#1b002e</color>
+  <color name="light_red">#ea710b</color>
+  <color name="black_70_opacity">#B3000000</color>
+  <color name="login_dialog">#00a1de</color>
+  <color name="heavy_orange">#fb7c02</color>
+  <color name="disable_color">#aeaeae</color>
+  <color name="green">#249c5e</color>
+  <color name="light_yellow">#febf14</color>
+  <color name="comment_black">#282828</color>
+  <color name="comment_Title">#26343d</color>
+  <color name="chapter_title">#585859</color>
+  <color name="chapter_desc">#3c3c3c</color>
+  <color name="card_border">#f1ad4b</color>
+  <color name="light_bg">#e9e9e9</color>
+  <color name="achievement">#fafafa</color>
+  <color name="transparent">#E6000000</color>
+  <color name="light_blue">#e5eef3</color>
+  <color name="redeem_gray">#737373</color>
+</resources>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_135sdp"
+    android:layout_margin="@dimen/_3sdp"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="4dp"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      >
+    <ImageView
+        android:id="@+id/imgStory"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp"
+        >
+
+      <TextView
+          android:id="@+id/tvStoryTitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/_5sdp"
+          android:textColor="@color/dark_gray"
+          tools:text="@string/story_title_lorem_ipsum_dolor_sit_amet"
+          style="@style/SemiBoldFont"
+          />
+
+      <TextView
+          android:id="@+id/tvRaceCourse"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/_5sdp"
+          android:textColor="@color/light_gray"
+          android:textSize="12sp"
+          tools:text="@string/keeneland_race_course"
+          />
+
+
+      <TextView
+          android:id="@+id/tvDescription"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/_8sdp"
+          android:ellipsize="end"
+          android:maxLines="3"
+          android:textColor="@color/light_gray"
+          android:textSize="12sp"
+          tools:text="@string/dummy_text"
+          />
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/_5sdp"
+          android:layout_marginTop="@dimen/_5sdp"
+          android:gravity="center_vertical"
+          android:orientation="horizontal"
+          >
+
+
+        <TextView
+            android:id="@+id/tvChapter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_chapter"
+            android:drawablePadding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/_8ssp"
+            tools:text="4 chapters"
+            />
+
+        <TextView
+            android:id="@+id/tvCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:drawableLeft="@drawable/ic_gift"
+            android:drawablePadding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/_8ssp"
+            tools:text="2 cards"
+            />
+
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:drawableLeft="@drawable/ic_mile"
+            android:drawablePadding="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/_8ssp"
+            tools:text="250 miles"
+            />
+
+      </LinearLayout>
+
+    </LinearLayout>
+  </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string-array name="welcome_text">
+    <item>A self-guide app with fun interactions</item>
+    <item>Play more to unlock badges and cards!</item>
+    <item>Gather points to gain more rewards!</item>
+  </string-array>
+
+  <string-array name="pre_story">
+    <item>1. SET UP YOUR LOCATION</item>
+    <item>2. SELECT THE STATES</item>
+    <item>3. SELECT THE RACETRACKS</item>
+  </string-array>
+
+  <string-array name="state_list">
+    <item>Alabama</item>
+    <item>Alaska</item>
+    <item>Arizona</item>
+    <item>California</item>
+    <item>Colorado</item>
+    <item>Connecticut</item>
+    <item>Delaware</item>
+    <item>Florida</item>
+    <item>Georgia</item>
+  </string-array>
+
+
+  <string-array name="race_track_list">
+    <item>CA - Barrets</item>
+    <item>CA - Cal Expo</item>
+    <item>CA - California Authority of Racing</item>
+    <item>CA - Del Mar</item>
+    <item>CA - Ferndale Race Track</item>
+    <item>CA - Fresno</item>
+    <item>CA - Golden Gate Fields</item>
+    <item>CA - Los Alamitos Race Course</item>
+    <item>CA - Willow Springs International Raceway</item>
+  </string-array>
+</resources>

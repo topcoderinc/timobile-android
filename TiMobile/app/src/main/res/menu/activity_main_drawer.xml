@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_story"
+        android:title="@string/story_selection"/>
+    <item
+        android:id="@+id/nav_bookmark"
+        android:title="@string/my_bookmark"/>
+    <item
+        android:id="@+id/nav_points"
+        android:title="@string/ti_points"/>
+    <item
+        android:id="@+id/nav_reward"
+        android:title="@string/rewards_shop"/>
+
+    <item
+        android:id="@+id/nav_profile"
+        android:title="@string/profile_summary"/>
+
+    <item
+        android:id="@+id/nav_help"
+        android:title="@string/help"/>
+
+    <item
+        android:id="@+id/nav_logout"
+        android:title="@string/log_out"/>
+  </group>
+
+
+</menu>

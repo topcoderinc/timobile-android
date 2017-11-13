@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="advDrawerLayout">
+    <attr format="boolean" name="adl_customBehavior"/>
+    <attr format="float" name="adl_viewScale"/>
+    <attr format="color" name="adl_viewScrimColor"/>
+    <attr format="dimension" name="adl_viewElevation"/>
+    <attr format="dimension" name="adl_drawerElevation"/>
+  </declare-styleable>
+
+  <declare-styleable name="RoundedImageView">
+    <attr format="dimension" name="riv_corner_radius"/>
+    <attr format="dimension" name="riv_corner_radius_top_left"/>
+    <attr format="dimension" name="riv_corner_radius_top_right"/>
+    <attr format="dimension" name="riv_corner_radius_bottom_left"/>
+    <attr format="dimension" name="riv_corner_radius_bottom_right"/>
+    <attr format="dimension" name="riv_border_width"/>
+    <attr format="color" name="riv_border_color"/>
+    <attr format="boolean" name="riv_mutate_background"/>
+    <attr format="boolean" name="riv_oval"/>
+    <attr name="android:scaleType"/>
+    <attr name="riv_tile_mode">
+      <enum name="clamp" value="0"/>
+      <enum name="repeat" value="1"/>
+      <enum name="mirror" value="2"/>
+    </attr>
+    <attr name="riv_tile_mode_x">
+      <enum name="clamp" value="0"/>
+      <enum name="repeat" value="1"/>
+      <enum name="mirror" value="2"/>
+    </attr>
+    <attr name="riv_tile_mode_y">
+      <enum name="clamp" value="0"/>
+      <enum name="repeat" value="1"/>
+      <enum name="mirror" value="2"/>
+    </attr>
+  </declare-styleable>
+
+
+  <declare-styleable name="LoadingIndicatorView">
+    <attr name="minWidth" format="dimension" />
+    <attr name="maxWidth" format="dimension"/>
+    <attr name="minHeight" format="dimension" />
+    <attr name="maxHeight" format="dimension"/>
+    <attr name="indicatorName" format="string"/>
+    <attr name="indicatorColor" format="color"/>
+  </declare-styleable>
+
+
+  <declare-styleable name="ReadMoreTextView">
+    <attr name="trimExpandedText" format="string" />
+    <attr name="trimCollapsedText" format="string" />
+    <attr name="trimLength" format="integer" />
+    <attr name="showTrimExpandedText" format="boolean" />
+    <attr name="colorClickableText" format="color" />
+    <attr name="trimLines" format="integer" />
+    <attr name="trimMode">
+      <enum name="trimModeLine" value="0"/>
+      <enum name="trimModeLength" value="1"/>
+    </attr>
+  </declare-styleable>
+
+  <declare-styleable name="CircleProgressView">
+    <attr name="progressNormalColor"/>
+    <attr name="progressReachColor"/>
+    <attr name="progressTextColor"/>
+    <attr name="progressTextSize"/>
+    <attr name="progressTextOffset"/>
+    <attr name="progressNormalSize"/>
+    <attr name="progressReachSize"/>
+    <attr format="dimension" name="radius"/>
+    <attr name="progressTextVisible"/>
+    <attr format="integer" name="progressStartArc"/>
+    <attr name="progressTextSkewX"/>
+    <attr name="progressTextPrefix"/>
+    <attr name="progressTextSuffix"/>
+    <attr name="innerBackgroundColor"/>
+    <attr format="enum" name="progressStyle">
+      <enum name="Normal" value="0"/>
+      <enum name="FillInner" value="1"/>
+      <enum name="FillInnerArc" value="2"/>
+    </attr>
+    <attr format="color" name="innerProgressColor"/>
+    <attr format="dimension" name="innerPadding"/>
+    <attr format="color" name="outerColor"/>
+    <attr format="dimension" name="outerSize"/>
+    <attr format="boolean" name="reachCapRound"/>
+  </declare-styleable>
+
+  <declare-styleable name="TinTableImageView">
+    <attr format="reference|color" name="tint_color"/>
+    <attr format="boolean" name="tint_set_selector"/>
+  </declare-styleable>
+</resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:background="#C0000000"
+    >
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="@dimen/_100sdp"
+      android:gravity="center"
+      android:text="@string/congratulations"
+      android:textColor="@color/white"
+      android:textSize="18sp"
+      style="@style/BoldFont"
+      />
+
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="@dimen/_20sdp"
+      android:gravity="center_vertical"
+      >
+    <ImageView
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:src="@drawable/ic_points"
+        />
+    <TextView
+        android:id="@+id/tvRewardPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:text="30 pts"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        style="@style/BoldFont"
+        />
+
+  </LinearLayout>
+
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="@dimen/_35sdp"
+      android:gravity="center"
+      android:lineSpacingExtra="8dp"
+      android:text="@string/earn_points"
+      android:textColor="@color/white"
+      android:textSize="14sp"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginBottom="@dimen/_10sdp"
+      android:layout_weight="1"
+      android:gravity="bottom"
+      >
+    <Button
+        android:id="@+id/btnContinueStory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@color/blue_indicator"
+        android:text="@string/continue_story"
+        android:textColor="@color/white"
+        />
+  </LinearLayout>
+</LinearLayout>

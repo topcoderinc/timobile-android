@@ -1,0 +1,38 @@
+[
+  {
+    "id" : 1,
+    "name" : "CA - Barrets"
+  },
+  {
+    "id" : 2,
+    "name" : "CA - Cal Expo"
+  },
+  {
+    "id" : 3,
+    "name" : "CA - California Authority of Racing"
+  },
+  {
+    "id" : 4,
+    "name" : "CA - Del Mar"
+  },
+  {
+    "id" : 5,
+    "name" : "CA - Ferndale Race Track"
+  },
+  {
+    "id" : 6,
+    "name" : "CA - Fresno"
+  },
+  {
+    "id" : 7,
+    "name" : "CA - Golden Gate Fields"
+  },
+  {
+    "id" : 8,
+    "name" : "CA - Los Alamitos Race Course"
+  },
+  {
+    "id" : 9,
+    "name" : "CA - Willow Springs International Raceway"
+  }
+]

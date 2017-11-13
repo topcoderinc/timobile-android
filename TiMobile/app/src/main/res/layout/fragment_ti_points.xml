@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_bg"
+    android:orientation="vertical"
+    >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_45sdp"
+      android:background="@color/dark_purple"
+      android:gravity="center"
+      >
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/ic_points"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:text="1000 pts"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        style="@style/BoldFont"
+        />
+  </LinearLayout>
+
+
+  <android.support.design.widget.TabLayout
+      android:id="@+id/tabLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:minHeight="?attr/actionBarSize"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      app:tabIndicatorColor="@color/blue_indicator"
+      app:tabSelectedTextColor="@color/blue_indicator"
+      app:tabTextColor="@color/light_gray"
+      />
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_5sdp"
+      android:background="@color/light_bg"
+      />
+
+  <android.support.v4.view.ViewPager
+      android:id="@+id/pager"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:background="@color/light_bg"
+      />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:padding="@dimen/_10sdp"
+      >
+    <Button
+        android:id="@+id/btnChapter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_indicator"
+        android:text="@string/go_to_card_shop"
+        android:textColor="@color/white"
+        style="@style/SemiBoldFont"
+        />
+  </LinearLayout>
+</LinearLayout>

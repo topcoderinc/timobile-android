@@ -1,0 +1,74 @@
+[
+  {
+    "id": 0,
+    "title": "Story Title Lorem Ipsum Dolor  Sit Amet",
+    "raceCourse": "CA - Barrets",
+    "description": "Ut wisi enim ad minim veniam quis  nostrud exerci tation ullamc",
+    "chapter": "4",
+    "card": "3",
+    "lat": "49.6484658",
+    "lng": "-54.773409",
+    "distance": "250",
+    "image": "http://www.wdrfree.com/public/assets/art/1415057430_Above-The-Clouds-license-free-CC0-980x704.jpg"
+  },
+  {
+    "id": 1,
+    "title": "Story Title Lorem Ipsum Dolor  Sit Amet",
+    "raceCourse": "CA - Fresno",
+    "description": "Ut wisi enim ad minim veniam quis  nostrud exerci tation ullamc",
+    "chapter": "2",
+    "card": "4",
+    "lat": "49.649890",
+    "lng": "-54.773699",
+    "distance": "300",
+    "image": "https://www.bensound.com/bensound-img/ofeliasdream.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Story Title Lorem Ipsum Dolor  Sit Amet",
+    "raceCourse": "CA - Barrets",
+    "description": "Ut wisi enim ad minim veniam quis  nostrud exerci tation ullamc",
+    "chapter": "2",
+    "card": "1",
+    "lat": "49.6462",
+    "lng": "-54.7675257",
+    "distance": "350",
+    "image": "https://www.bensound.com/bensound-img/betterdays.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Story Title Lorem Ipsum Dolor  Sit Amet",
+    "raceCourse": "CA - Barrets",
+    "description": "Ut wisi enim ad minim veniam quis  nostrud exerci tation ullamc",
+    "chapter": "4",
+    "card": "3",
+    "lat": "49.648026",
+    "lng": "-54.769474",
+    "distance": "400",
+    "image": "http://www.wdrfree.com/public/assets/art/1415057430_Above-The-Clouds-license-free-CC0-980x704.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Story Title Lorem Ipsum Dolor  Sit Amet",
+    "raceCourse": "CA - Cal Expo",
+    "description": "Ut wisi enim ad minim veniam quis  nostrud exerci tation ullamc",
+    "chapter": "8",
+    "card": "3",
+    "lat": "49.648935",
+    "lng": "-54.763941",
+    "distance": "450",
+    "image": "https://www.bensound.com/bensound-img/ofeliasdream.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Story Title Lorem Ipsum Dolor  Sit Amet",
+    "raceCourse": "CA - Cal Expo",
+    "description": "Ut wisi enim ad minim veniam quis  nostrud exerci tation ullamc",
+    "chapter": "4",
+    "card": "3",
+    "lat": "49.648655",
+    "lng": "-54.770695",
+    "distance": "450",
+    "image": "https://www.bensound.com/bensound-img/betterdays.jpg"
+  }
+]

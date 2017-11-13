@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    >
+
+  <ImageView
+      android:layout_marginTop="15dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:src="@drawable/ic_insider"
+      />
+
+  <TextView
+      android:id="@+id/tvWelcomeText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="10dp"
+      android:textSize="18sp"
+      android:textColor="@color/blue_indicator"
+      style="@style/SemiBoldFont"
+      tools:text="@string/a_self_guide_app_with_fun_interactions"
+      />
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginLeft="@dimen/_30sdp"
+      android:layout_marginRight="@dimen/_30sdp"
+      android:layout_marginTop="10dp"
+      android:textSize="12sp"
+      android:gravity="center"
+      android:text="@string/welcome_description"
+      />
+
+
+</LinearLayout>

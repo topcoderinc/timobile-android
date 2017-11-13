@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/section"
+    android:orientation="vertical"
+    >
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/linearFilter"
+      android:layout_marginLeft="@dimen/_10sdp"
+      android:layout_marginRight="@dimen/_10sdp"
+      android:layout_marginTop="@dimen/_15sdp"
+      />
+
+
+  <com.google.android.gms.maps.MapView
+      android:id="@+id/map"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"
+      />
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/filterRecyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_200sdp"
+      android:layout_below="@id/linearFilter"
+      android:background="@color/white"
+      android:elevation="4dp"
+      android:padding="@dimen/_10sdp"
+      android:visibility="gone"
+      />
+  <LinearLayout
+      android:id="@+id/linearFilter"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_45sdp"
+      android:background="@color/white"
+      android:elevation="4dp"
+      android:orientation="horizontal"
+      >
+
+    <RelativeLayout
+        android:id="@+id/relativeRaceTrack"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="@dimen/_5sdp"
+        >
+      <TextView
+          android:id="@+id/tvRaceTracks"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_toLeftOf="@+id/imgDown"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="@string/racetracks"
+          android:textColor="@color/light_gray"
+          style="@style/SourcePro"
+          />
+
+      <TextView
+          android:id="@+id/tvSelectTrack"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/tvRaceTracks"
+          android:layout_toLeftOf="@+id/imgDown"
+          android:ellipsize="end"
+          android:maxLines="1"
+          tools:text="Keeneland Race Cource"
+          android:textColor="@android:color/black"
+          />
+
+      <ImageView
+          android:id="@+id/imgDown"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+          android:padding="@dimen/_5sdp"
+          android:src="@drawable/ic_arrow_down"
+          />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/divider"
+        />
+    <RelativeLayout
+        android:id="@+id/relativeSortBy"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="@dimen/_5sdp"
+        >
+
+      <TextView
+          android:id="@+id/dpSortBy"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_toLeftOf="@+id/imgSortDown"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="@string/sort_by"
+          android:textColor="@color/light_gray"
+          style="@style/SourcePro"
+          />
+
+      <TextView
+          android:id="@+id/tvSortBy"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@id/dpSortBy"
+          android:layout_toLeftOf="@+id/imgSortDown"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="@string/nearest"
+          android:textColor="@android:color/black"
+          />
+      <ImageView
+          android:id="@+id/imgSortDown"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+          android:padding="@dimen/_5sdp"
+          android:src="@drawable/ic_arrow_down"
+          />
+
+    </RelativeLayout>
+
+  </LinearLayout>
+
+  <TextView
+      android:id="@+id/tvNoData"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:text="@string/no_data_found"
+      android:textColor="@color/dark_gray"
+      android:visibility="gone"
+      />
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_2sdp"
+      android:layout_below="@+id/linearFilter"
+      android:background="@color/purple"
+      />
+
+  <LinearLayout
+      android:id="@+id/linearTile"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:background="@drawable/ic_shadow"
+      android:orientation="vertical"
+      android:paddingBottom="@dimen/_15sdp"
+      android:paddingLeft="@dimen/_10sdp"
+      android:paddingRight="@dimen/_10sdp"
+      android:visibility="gone"
+      >
+    <include layout="@layout/item_story"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Displaying 5 of 5 stories in this area"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        />
+  </LinearLayout>
+
+</RelativeLayout>

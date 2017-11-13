@@ -1,0 +1,130 @@
+<resources>
+  <string name="app_name">TiMobileApp</string>
+  <string name="skip_this">Skip This!</string>
+  <string name="a_self_guide_app_with_fun_interactions">A self-guide app with fun interactions</string>
+  <string name="welcome_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</string>
+  <string name="login_error">Please enter correct email or password</string>
+  <string name="email">Email</string>
+  <string name="password">Password</string>
+  <string name="sign_in_with_facebook">Sign In with Facebook</string>
+  <string name="forgot_your_password">Forgot your password?</string>
+  <string name="don_t_have_an_account">Don\'t have an account?</string>
+  <string name="sign_up">Sign Up</string>
+  <string name="sign_in">Sign In</string>
+  <string name="near_location">Let our App use your phone’s GPS to automatically add stories if they are near your location.</string>
+  <string name="areas_near_you">Areas Near You</string>
+  <string name="filter_here">Filter Here</string>
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="story_selection">Story Selections</string>
+  <string name="my_bookmark">My Bookmark</string>
+  <string name="ti_points">Ti Points</string>
+  <string name="rewards_shop">Rewards Shop</string>
+  <string name="profile_summary">Profile Summary</string>
+  <string name="help">Help</string>
+  <string name="log_out">Log Out</string>
+  <string name="throughbred_insider">Thoroughbred Insider</string>
+  <string name="decline">Decline</string>
+  <string name="allow">Allow</string>
+  <string name="back">Back</string>
+  <string name="next">Next</string>
+  <string name="finish">Finish</string>
+  <string name="racetracks">RaceTracks</string>
+  <string name="dummy_text">Ut wisi enim ad aveniam quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea…</string>
+  <string name="keeneland_race_course">Keeneland Race Course</string>
+  <string name="story_title_lorem_ipsum_dolor_sit_amet">Story Title Lorem Ipsum Dolor Sit Amet</string>
+  <string name="cancel">Cancel</string>
+  <string name="please_wait">Please wait</string>
+  <string name="ok">OK</string>
+  <string name="sort_by">Sort by</string>
+  <string name="nearest">Nearest</string>
+  <string name="error">Could not get the information</string>
+  <string name="no_data_found">No Data Found!</string>
+  <string name="search">Search</string>
+  <string name="map">Map</string>
+  <string name="track_story_progress">Track Story Progress</string>
+  <string name="summary">Summary</string>
+  <string name="reward_pts">%1$d pts</string>
+
+
+  <plurals name="chapter">
+    <item quantity="one">%1$s chapter</item>
+    <item quantity="other">%1$s chapters</item>
+  </plurals>
+
+  <plurals name="card">
+    <item quantity="one">%1$s card</item>
+    <item quantity="other">%1$s cards</item>
+  </plurals>
+
+  <plurals name="distance">
+    <item quantity="one">%1$s mile</item>
+    <item quantity="other">%1$s miles</item>
+  </plurals>
+
+  <string name="read_more">Read More</string>
+  <string name="read_less">Read Less</string>
+  <string name="tags">Tags</string>
+  <string name="rewards">Rewards</string>
+  <string name="additional_reward">Additional Reward</string>
+  <string name="selfie_up">Selfie Up</string>
+  <string name="take_a_selfie">Take a Selfie</string>
+  <string name="selfie_text">Take a selfie in the actual\nlocation for additional rewards.</string>
+  <string name="collect_rewards">Collect Rewards</string>
+  <string name="comments">Comments</string>
+  <string name="add_comment">Add Comment</string>
+  <string name="post">Post</string>
+  <string name="continue_story">Continue story</string>
+  <string name="earn_points">Wow! You have earned 30 pts by take a selfie\nin the location. Additional points have been\nadded automatically in your account.</string>
+  <string name="congratulations">Congratulations!\nyou have completed the task</string>
+  <string name="congratulations_card">Congratulations!\nyou got 3 trading cards</string>
+  <string name="reward_card">Wow! You have unlocked Card Name Lorem,\nCard Name Lorem, and Card Name Lorem.\nCheck your trading card gallery for details!</string>
+  <string name="back_to_story">Back to Story</string>
+  <string name="main_menu">Main Menu</string>
+  <string name="view_my_achievement">View My Achievement</string>
+  <string name="reviews">Reviews</string>
+  <string name="trading_cards">Trading Cards</string>
+  <string name="stories">Stories</string>
+  <string name="badges">Badges</string>
+  <string name="share">Share</string>
+  <string name="related_to">Related to:</string>
+  <string name="go_to_selected_chapter">Go to selected chapter</string>
+  <string name="redeem">Redeem</string>
+  <string name="change_photo_profile">Change Photo Profile</string>
+  <string name="profile_information">Profile Information</string>
+  <string name="third_party_news">Receive news about third-party deals\nto my mails.</string>
+  <string name="free_admission">Free admission to Win Star Farm\non your next visit.</string>
+  <string name="name">Name</string>
+  <string name="preference_setting">Preference Setting</string>
+  <string name="order_by">Order by:</string>
+  <string name="points_name_ascending"><![CDATA[Points & Name (Ascending)]]></string>
+  <string name="faq">FAQ</string>
+  <string name="empty_string"/>
+  <string name="pick_image_intent_text">Pick Image</string>
+
+  <string name="all_permissions_denied_feedback">All those permissions are needed for doing further stuff</string>
+  <string name="permission_rationale_title">We need this permission</string>
+  <string name="permission_rationale_message">This permission is needed for doing some further stuff so please, allow it!</string>
+  <string name="permission_rationale_settings_button_text">SETTINGS</string>
+
+  <string name="camera_permission_confirmation">This app demonstrates the usage of CameraView. In order to do that, it needs permission to access camera.</string>
+  <string name="camera_permission_not_granted">Camera app cannot do anything without camera permission.</string>
+  <string name="picture_taken">Picture taken</string>
+  <string name="aspect_ratio">Aspect ratio</string>
+  <string name="switch_flash">Switch flash</string>
+  <string name="switch_camera">Switch camera</string>
+  <string name="flash_auto">Flash auto</string>
+  <string name="flash_off">Flash off</string>
+  <string name="flash_on">Flash on</string>
+  <string name="retake">Retake</string>
+  <string name="camera">Camera</string>
+  <string name="gallery">Gallery</string>
+  <string name="pick_or_take_a_selfie">Pick or Take a Selfie</string>
+  <string name="profile_settings">Profile Settings</string>
+  <string name="edit">Edit</string>
+  <string name="save">Save</string>
+  <string name="go_to_card_shop">Go To Card Shop</string>
+  <string name="achievements">Achievements</string>
+  <string name="daily_tasks">Daily Tasks</string>
+  <string name="info">Info</string>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+    <TextView
+        android:id="@+id/tv_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_4x"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_5x2"
+        tools:text="Step 1 of 4"
+        />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignEnd="@+id/tv_step"
+        android:layout_alignLeft="@+id/tv_step"
+        android:layout_alignRight="@+id/tv_step"
+        android:layout_alignStart="@+id/tv_step"
+        android:layout_below="@id/tv_step"
+        android:layout_gravity="center"
+        android:layout_marginTop="6dp"
+        android:textColor="@android:color/white"
+        />
+
+    <TextView
+        android:id="@+id/tv_step_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_step"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/margin_3x"
+        android:gravity="center_horizontal"
+        android:lines="2"
+        android:paddingLeft="@dimen/padding_2x"
+        android:paddingRight="@dimen/padding_2x"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_2x"
+        />
+
+  </RelativeLayout>
+
+  <ProgressBar
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_margin="@dimen/margin_4x"
+      android:layout_weight="1"
+      android:padding="@dimen/padding_4x"
+      />
+
+  <Button
+      android:id="@+id/btn_cancel"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginBottom="@dimen/button_margin"
+      android:layout_marginLeft="@dimen/button_margin"
+      android:layout_marginRight="@dimen/button_margin"
+      android:layout_marginTop="@dimen/margin_4x"
+      android:gravity="center"
+      android:text="@string/cancel"
+      android:textColor="@android:color/white"
+      android:textSize="@dimen/text_2x"
+      />
+
+</LinearLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/_8sdp"
+    >
+
+
+  <TextView
+      android:id="@+id/tvCount"
+      android:layout_width="@dimen/_25sdp"
+      android:layout_height="@dimen/_25sdp"
+      android:background="@drawable/blue_radius"
+      android:gravity="center"
+      android:padding="@dimen/_3sdp"
+      android:text="5"
+      android:textColor="@color/white"
+      android:textSize="12sp"
+      />
+
+  <TextView
+      android:id="@+id/tvName"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/_10sdp"
+      android:layout_weight="1"
+      tools:text="Chapter Name Lorem Posum"
+      />
+
+  <FrameLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      >
+    <com.topcoder.timobile.customviews.progress.CircleProgressView
+        android:id="@+id/circleProgress"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:progress="100"
+        app:innerPadding="@dimen/_2sdp"
+        app:outerColor="@color/hint_color"
+        app:outerSize="@dimen/_2sdp"
+        app:progressReachColor="@color/green"
+        app:progressStyle="FillInnerArc"
+        app:radius="15dp"
+        />
+    <ImageView
+        android:id="@+id/imgCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_check_white"
+        />
+  </FrameLayout>
+
+  <TextView
+      android:id="@+id/tvStoryCompleted"
+      android:layout_width="20dp"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      android:textColor="@color/green"
+      android:textSize="12sp"
+      tools:text="25"
+      />
+  <TextView
+      android:id="@+id/tvTotalStory"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="@color/hint_color"
+      android:textSize="12sp"
+      tools:text="/25"
+
+      />
+
+</LinearLayout>

@@ -1,0 +1,109 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/blue_indicator </item>
+
+  </style>
+
+  <style name="Theme.AppCompat.Translucent" parent="AppTheme">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowBackground">@color/transparent</item>
+    <item name="android:colorBackgroundCacheHint">@null</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowAnimationStyle">@android:style/Animation</item>
+  </style>
+
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="AppTheme.NoActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+  </style>
+
+  <style name="LoadingIndicatorView">
+    <item name="minWidth">48dip</item>
+    <item name="maxWidth">48dip</item>
+    <item name="minHeight">48dip</item>
+    <item name="maxHeight">48dip</item>
+    <item name="indicatorName">BallClipRotateIndicator</item>
+  </style>
+
+  <style name="LoadingIndicatorView.Large">
+    <item name="minWidth">76dip</item>
+    <item name="maxWidth">76dip</item>
+    <item name="minHeight">76dip</item>
+    <item name="maxHeight">76dip</item>
+    <item name="indicatorName">BallClipRotateIndicator</item>
+  </style>
+
+  <style name="LoadingIndicatorView.Small">
+    <item name="minWidth">24dip</item>
+    <item name="maxWidth">24dip</item>
+    <item name="minHeight">24dip</item>
+    <item name="maxHeight">24dip</item>
+    <item name="indicatorName">BallClipRotateIndicator</item>
+  </style>
+
+  <style name="NavDrawerTextStyle" parent="Base.TextAppearance.AppCompat">
+    <item name="android:textSize">16sp</item>
+    <item name="fontPath">fonts/OpenSans-Regular.ttf</item>
+  </style>
+
+  <style name="RegularFont">
+    <item name="fontPath">fonts/OpenSans-Regular.ttf</item>
+  </style>
+
+  <style name="SemiBoldFont">
+    <item name="fontPath">fonts/OpenSans-SemiBold.ttf</item>
+  </style>
+
+  <style name="BoldFont">
+    <item name="fontPath">fonts/OpenSans-Bold.ttf</item>
+  </style>
+
+  <style name="Light">
+    <item name="fontPath">fonts/OpenSans-Light.ttf</item>
+  </style>
+
+  <style name="Roman">
+    <item name="fontPath">fonts/FrutigerLTStd-Roman.otf</item>
+  </style>
+
+  <style name="SourcePro">
+    <item name="fontPath">fonts/SourceSansPro-Regular.ttf</item>
+  </style>
+
+  <style name="SeekBarStyle">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">25dp</item>
+    <item name="android:progress">20</item>
+    <item name="android:max">100</item>
+    <item name="android:maxHeight">5dp</item>
+    <item name="android:enabled">false</item>
+    <item name="android:progressDrawable">@drawable/seekbar_style</item>
+    <item name="android:splitTrack">false</item>
+    <item name="android:thumb">@drawable/ic_thumbnail</item>
+
+  </style>
+
+  <style name="SeekBarStyleChapter">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">25dp</item>
+    <item name="android:progress">20</item>
+    <item name="android:max">100</item>
+    <item name="android:maxHeight">5dp</item>
+    <item name="android:enabled">false</item>
+    <item name="android:progressDrawable">@drawable/seekbar_chapter_style</item>
+    <item name="android:splitTrack">false</item>
+    <item name="android:thumb">@drawable/ic_chapter_thumb</item>
+
+  </style>
+
+  <style name="SwitchCompatTheme">
+    <item name="colorControlActivated">@color/green</item>
+  </style>
+</resources>

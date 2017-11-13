@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/purple"
+      android:gravity="center_horizontal"
+      android:orientation="vertical"
+      android:paddingBottom="@dimen/_20sdp"
+      >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_story_ph"
+        />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="David Williams"
+        android:textColor="@color/white"
+        style="@style/SemiBoldFont"
+        />
+
+    <TextView
+        android:id="@+id/tvUserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="david.williams@gmail.com"
+        android:textColor="@color/white"
+        />
+  </LinearLayout>
+</merge>

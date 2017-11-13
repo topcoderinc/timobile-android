@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+
+  <EditText
+      android:id="@+id/etFilter"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_40sdp"
+      android:background="@null"
+      android:drawablePadding="@dimen/_10sdp"
+      android:drawableRight="@drawable/ic_search"
+      android:hint="@string/filter_here"
+      android:imeOptions="actionDone"
+      android:maxLines="1"
+      android:paddingLeft="@dimen/_10sdp"
+      android:paddingRight="@dimen/_10sdp"
+      android:textColor="@color/hint_color"
+      android:textSize="15sp"
+      />
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_5sdp"
+      android:background="@color/section"
+      />
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/_15sdp"
+      android:layout_marginTop="@dimen/_15sdp"
+      />
+</LinearLayout>

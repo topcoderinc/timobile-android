@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:background="@color/dark_purple"
+    android:paddingTop="16dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    >
+
+  <ImageView
+      android:id="@+id/imgClose"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_marginTop="@dimen/_10sdp"
+      android:padding="@dimen/_10sdp"
+      android:src="@drawable/ic_close"
+      />
+
+  <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profileImage"
+      android:layout_width="80dp"
+      android:layout_height="80dp"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="@dimen/_40sdp"
+      tools:src="@drawable/ic_story_ph"
+      />
+
+  <TextView
+      android:id="@+id/tvUserName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/profileImage"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="@dimen/_15sdp"
+      android:textColor="@color/white"
+      tools:text="David Williams"
+      style="@style/SemiBoldFont"
+      />
+
+  <TextView
+      android:id="@+id/tvUserEmail"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/tvUserName"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="@dimen/_5sdp"
+      android:textColor="@color/white"
+      tools:text="david.williams@gmail.com"
+      />
+</RelativeLayout>

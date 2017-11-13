@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/divider"
+    >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_45sdp"
+      android:background="@color/dark_purple"
+      android:gravity="center"
+      >
+    <ImageView
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/ic_points"
+        />
+    <TextView
+        android:id="@+id/tvRewardPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:text="1000 pts"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        style="@style/BoldFont"
+        />
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/achievement"
+      android:padding="@dimen/_10sdp"
+      >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/order_by"
+        android:textSize="12sp"
+        />
+
+    <TextView
+        android:id="@+id/tvOrderBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:text="@string/points_name_ascending"
+        android:textSize="12sp"
+        android:textColor="@color/blue_indicator"
+        style="@style/SemiBoldFont"
+        />
+
+  </LinearLayout>
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      />
+</LinearLayout>

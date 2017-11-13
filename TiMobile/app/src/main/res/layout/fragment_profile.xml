@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_bg"
+    android:orientation="vertical"
+    >
+
+  <include layout="@layout/user_profile_view"/>
+
+  <LinearLayout
+      android:id="@+id/linearStoryProgress"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_40sdp"
+      android:background="@color/heavy_orange"
+      >
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_weight="1"
+        android:text="@string/view_my_achievement"
+        android:textColor="@color/white"
+        style="@style/SemiBoldFont"
+        />
+
+    <ImageView
+        android:id="@+id/imgArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_down"
+        />
+
+  </LinearLayout>
+  <LinearLayout
+      android:id="@+id/linearAchievements"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      >
+    <include layout="@layout/item_my_achievement"/>
+  </LinearLayout>
+  <android.support.design.widget.TabLayout
+      android:id="@+id/tabLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:minHeight="?attr/actionBarSize"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      app:tabIndicatorColor="@color/blue_indicator"
+      app:tabSelectedTextColor="@color/blue_indicator"
+      app:tabTextColor="@color/light_gray"
+      />
+
+  <android.support.v4.view.ViewPager
+      android:id="@+id/pager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="@dimen/_5sdp"
+      android:background="@color/white"
+      />
+</LinearLayout>

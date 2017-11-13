@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_margin="@dimen/_10sdp"
+    >
+
+  <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/imgComment"
+      android:layout_width="@dimen/_30sdp"
+      android:layout_height="@dimen/_30sdp"
+      tools:src="@drawable/ic_comment_ph"
+      />
+
+  <TextView
+      android:id="@+id/tvUserName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="@dimen/_10sdp"
+      android:layout_toRightOf="@+id/imgComment"
+      tools:text="Sharon Osbourne"
+      android:textColor="@color/comment_Title"
+      style="@style/SemiBoldFont"
+      />
+  <TextView
+      android:id="@+id/tvTimeStamp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/tvUserName"
+      android:layout_marginLeft="@dimen/_10sdp"
+      android:layout_toRightOf="@+id/imgComment"
+      tools:text="12 hours ago"
+      android:textColor="@color/gray_indicator"
+      android:textSize="12sp"
+      />
+
+  <ImageView
+      android:id="@+id/imgMenu"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_margin="@dimen/_10sdp"
+      android:src="@drawable/ic_menu_dot"
+      />
+
+  <TextView
+      android:id="@+id/tvComment"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/imgComment"
+      android:layout_marginTop="@dimen/_5sdp"
+      tools:text="Lorem ipsum dolor sit amet consectetuer adipiscing elit sed diam nonummy nibh euismod tincidunt ut laoreet."
+      />
+</RelativeLayout>
