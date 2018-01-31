@@ -1,293 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
 
-  <include layout="@layout/title_header"/>
+  <include layout="@layout/title_header" />
+
   <android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      >
-    <LinearLayout
+      android:orientation="vertical">
+
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/purple"
-          android:gravity="center_horizontal"
-          android:orientation="vertical"
-          >
+        android:background="@color/purple"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:src="@drawable/ic_story_ph"
-            />
+          android:id="@+id/profileImage"
+          android:layout_width="80dp"
+          android:layout_height="80dp"
+          android:layout_marginTop="@dimen/_15sdp"
+          android:src="@drawable/ic_story_ph" />
 
         <TextView
-            android:id="@+id/tvChangePhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:text="@string/change_photo_profile"
-            android:textColor="@color/white"
-            style="@style/SemiBoldFont"
-            android:visibility="invisible"
-            />
+          android:id="@+id/tvChangePhoto"
+          style="@style/SemiBoldFont"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="@dimen/_15sdp"
+          android:layout_marginTop="@dimen/_15sdp"
+          android:text="@string/change_photo_profile"
+          android:textColor="@color/white"
+          android:visibility="invisible" />
       </LinearLayout>
 
       <TextView
+        style="@style/SemiBoldFont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/section"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/profile_information"
+        android:textColor="@color/dark_gray" />
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divider" />
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/_10sdp">
+
+
+          <TextView
+            android:id="@+id/tvFirstName"
+            style="@style/SemiBoldFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/first_name"
+            android:textColor="@color/dark_gray" />
+
+          <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFirstName"
+            android:hint="@string/your_first_name"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@null"
+            android:enabled="false"
+            android:maxLines="1"
+            android:textColor="@color/light_gray"
+            android:textSize="12sp"
+            tools:text="David Wiliams" />
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right_arrow_gray" />
+        </RelativeLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="@color/divider" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/_10sdp">
+
+          <TextView
+            android:id="@+id/tvSecondName"
+            style="@style/SemiBoldFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/second_name"
+            android:textColor="@color/dark_gray" />
+
+          <EditText
+            android:id="@+id/etSecondName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSecondName"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@null"
+            android:enabled="false"
+            android:maxLines="1"
+            android:hint="@string/your_last_name"
+            android:textColor="@color/light_gray"
+            android:textSize="12sp"
+            tools:text="David Wiliams" />
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right_arrow_gray" />
+        </RelativeLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="@color/divider" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/_10sdp">
+
+          <TextView
+            android:id="@+id/tvEmail"
+            style="@style/SemiBoldFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textColor="@color/dark_gray" />
+
+          <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="23dp"
+            android:background="@null"
+            android:enabled="false"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:hint="@string/your_email_address"
+            android:textColor="@color/light_gray"
+            android:textSize="12sp"
+            tools:text="david.wiliams@gmail.com" />
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right_arrow_gray" />
+        </RelativeLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="@color/divider" />
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+          android:id="@+id/rlPassword"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:padding="@dimen/_10sdp">
+
+          <TextView
+            android:id="@+id/tvPassword"
+            style="@style/SemiBoldFont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="@color/dark_gray" />
+
+          <EditText
+            android:id="@+id/etPasword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPassword"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@null"
+            android:enabled="false"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColor="@color/light_gray"
+            android:textSize="12sp"
+            tools:text="David Wiliams"
+
+            />
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_right_arrow_gray" />
+        </RelativeLayout>
+
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="@color/divider" />
+
+        <TextView
+          style="@style/SemiBoldFont"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:background="@color/section"
           android:padding="@dimen/_8sdp"
-          android:text="@string/profile_information"
-          android:textColor="@color/dark_gray"
-          style="@style/SemiBoldFont"
-          />
-      <View
+          android:text="@string/preference_setting"
+          android:textColor="@color/dark_gray" />
+
+        <View
           android:layout_width="match_parent"
           android:layout_height="1px"
-          android:background="@color/divider"
-          />
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/white"
-          android:orientation="vertical"
-          >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            >
+          android:background="@color/divider" />
 
-          <TextView
-              android:id="@+id/tvName"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/name"
-              android:textColor="@color/dark_gray"
-              style="@style/SemiBoldFont"
-              />
-
-          <EditText
-              android:id="@+id/etName"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_below="@+id/tvName"
-              android:layout_marginTop="@dimen/_5sdp"
-              android:background="@null"
-              android:textColor="@color/light_gray"
-              android:textSize="12sp"
-              android:enabled="false"
-              android:maxLines="1"
-              tools:text="David Wiliams"
-
-              />
-
-          <ImageView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignParentRight="true"
-              android:layout_centerVertical="true"
-              android:src="@drawable/ic_right_arrow_gray"
-              />
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider"
-            />
-      </LinearLayout>
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/white"
-          android:orientation="vertical"
-          >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            >
-
-          <TextView
-              android:id="@+id/tvEmail"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/email"
-              android:textColor="@color/dark_gray"
-              style="@style/SemiBoldFont"
-              />
-
-          <EditText
-              android:id="@+id/etEmail"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_below="@+id/tvEmail"
-              android:layout_marginTop="@dimen/_5sdp"
-              android:background="@null"
-              android:inputType="textEmailAddress"
-              android:textColor="@color/light_gray"
-              android:enabled="false"
-              android:textSize="12sp"
-              android:maxLines="1"
-              tools:text="david.wiliams@gmail.com"
-
-              />
-
-          <ImageView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignParentRight="true"
-              android:layout_centerVertical="true"
-              android:src="@drawable/ic_right_arrow_gray"
-              />
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider"
-            />
-      </LinearLayout>
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:background="@color/white"
-          android:orientation="vertical"
-          >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            >
-
-          <TextView
-              android:id="@+id/tvPassword"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/password"
-              android:textColor="@color/dark_gray"
-              style="@style/SemiBoldFont"
-              />
-
-          <EditText
-              android:id="@+id/etPasword"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_below="@+id/tvPassword"
-              android:layout_marginTop="@dimen/_5sdp"
-              android:background="@null"
-              android:inputType="textPassword"
-              android:textColor="@color/light_gray"
-              android:textSize="12sp"
-              android:maxLines="1"
-              android:enabled="false"
-              tools:text="David Wiliams"
-
-              />
-
-          <ImageView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_alignParentRight="true"
-              android:layout_centerVertical="true"
-              android:src="@drawable/ic_right_arrow_gray"
-              />
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/section"
-            android:padding="@dimen/_8sdp"
-            android:text="@string/preference_setting"
-            android:textColor="@color/dark_gray"
-            style="@style/SemiBoldFont"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider"
-            />
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_10sdp"
-            >
+          android:id="@+id/llOptionRoot1"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:padding="@dimen/_10sdp">
 
           <TextView
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="@string/third_party_news"
-              android:textColor="@color/dark_gray"
-              />
+            android:id="@+id/tvOption1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="N/A"
+            android:textColor="@color/dark_gray" />
 
 
           <android.support.v7.widget.SwitchCompat
-              android:id="@+id/switchThirdParty"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:enabled="false"
-              android:checked="true"
-              android:theme="@style/SwitchCompatTheme"
-              />
+            android:id="@+id/tgOption1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:enabled="false"
+            android:theme="@style/SwitchCompatTheme" />
 
         </LinearLayout>
+
         <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider"
-            />
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="@color/divider" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="@dimen/_10sdp"
-            >
+          android:id="@+id/llOptionRoot2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:padding="@dimen/_10sdp">
 
           <TextView
-              android:layout_width="0dp"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:text="@string/free_admission"
-              android:textColor="@color/dark_gray"
-              />
+            android:id="@+id/tvOption2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="N/A"
+            android:textColor="@color/dark_gray" />
 
 
           <android.support.v7.widget.SwitchCompat
-              android:id="@+id/switchFreeAdmission"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:checked="true"
-              android:enabled="false"
-              android:theme="@style/SwitchCompatTheme"
-              />
+            android:id="@+id/tgOption2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:enabled="false"
+            android:theme="@style/SwitchCompatTheme" />
 
         </LinearLayout>
+
         <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/divider"
-            />
+          android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="@color/divider" />
       </LinearLayout>
     </LinearLayout>
   </android.support.v4.widget.NestedScrollView>

@@ -13,13 +13,22 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
 import com.timobileapp.R;
 import com.topcoder.timobile.activity.HomeActivity;
 import com.topcoder.timobile.baseclasses.BaseFragment;
+import com.topcoder.timobile.model.event.UserUpdateEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +42,13 @@ public class TiPointsFragment extends BaseFragment {
   @BindView(R.id.tabLayout) TabLayout tabLayout;
   @BindView(R.id.pager) ViewPager pager;
   @BindView(R.id.btnChapter) Button btnChapter;
+  @BindView(R.id.tvTiTotalPoints) TextView tvTiTotalPoints;
+
   Unbinder unbinder;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    EventBus.getDefault().register(this);
     setHasOptionsMenu(true);
   }
 
@@ -52,6 +64,12 @@ public class TiPointsFragment extends BaseFragment {
     setupViewPager(pager);
     tabLayout.setupWithViewPager(pager);
     changeTabsFont(tabLayout);
+    updateTotalPoints(null);
+  }
+
+  @Subscribe public void updateTotalPoints(UserUpdateEvent event) {
+    String totalPoints = apiService.getCurrentUser().getPointsAmount() + " pts";
+    tvTiTotalPoints.setText(totalPoints);
   }
 
   /**
@@ -99,6 +117,7 @@ public class TiPointsFragment extends BaseFragment {
 
   @Override public void onDestroyView() {
     super.onDestroyView();
+    EventBus.getDefault().unregister(this);
     unbinder.unbind();
   }
 

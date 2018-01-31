@@ -7,17 +7,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+
 import com.timobileapp.R;
 import com.topcoder.timobile.adapter.BadgeAdapter;
 import com.topcoder.timobile.baseclasses.BaseFragment;
 import com.topcoder.timobile.dialogs.BadgeDialogFragment;
-import com.topcoder.timobile.model.BadgeModel;
+import com.topcoder.timobile.model.UserBadge;
+
 import java.util.ArrayList;
 import java.util.List;
-import timber.log.Timber;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Author: Harshvardhan
@@ -28,7 +30,7 @@ public class BadgeFragment extends BaseFragment {
 
   @BindView(R.id.recyclerView) RecyclerView recyclerView;
   Unbinder unbinder;
-  private List<BadgeModel> badgeModelList = new ArrayList<>();
+  private List<UserBadge> badgeModelList = new ArrayList<>();
   private BadgeAdapter adapter;
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,21 +41,18 @@ public class BadgeFragment extends BaseFragment {
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
-    apiService.getBadge().subscribe(this::onSuccess, this::onError);
+    recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
   }
 
-  private void onError(Throwable throwable) {
-    Timber.d(throwable);
-  }
 
-  private void onSuccess(List<BadgeModel> badgeModels) {
-    badgeModelList.addAll(badgeModels);
+  public void onSuccess(List<UserBadge> badgeModels) {
+    badgeModelList = badgeModels;
     adapter = new BadgeAdapter(getActivity(), badgeModelList);
     recyclerView.setAdapter(adapter);
     adapter.setRecycleOnItemClickListner((view, position) -> {
-      BadgeDialogFragment dialogFragment = new BadgeDialogFragment();
-      dialogFragment.show(getChildFragmentManager(),dialogFragment.getClass().getName());
+      UserBadge userBadge = badgeModels.get(position);
+      BadgeDialogFragment dialogFragment = BadgeDialogFragment.newInstance(userBadge.getBadge());
+      dialogFragment.show(getChildFragmentManager(), dialogFragment.getClass().getName());
     });
   }
 

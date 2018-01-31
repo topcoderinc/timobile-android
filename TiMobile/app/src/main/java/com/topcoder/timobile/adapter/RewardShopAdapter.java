@@ -4,17 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lombok.Setter;
+
 import com.timobileapp.R;
 import com.topcoder.timobile.baseclasses.BaseRecyclerAdapter;
 import com.topcoder.timobile.customviews.roundimageview.RoundedImageView;
 import com.topcoder.timobile.glide.GlideApp;
-import com.topcoder.timobile.model.RewardShopModel;
-import java.util.ArrayList;
+import com.topcoder.timobile.model.Card;
+import com.topcoder.timobile.model.event.BuyCardEvent;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 /**
@@ -22,15 +26,13 @@ import java.util.List;
  * Date: 01/11/17
  */
 
-public class RewardShopAdapter extends BaseRecyclerAdapter<RewardShopAdapter.MyViewHolder> implements Filterable {
+public class RewardShopAdapter extends BaseRecyclerAdapter<RewardShopAdapter.MyViewHolder> {
   private final Context context;
-  private final List<RewardShopModel> rewardShopModels;
-  private List<RewardShopModel> mFilteredList;
+  private final List<Card> rewardShopModels;
 
-  public RewardShopAdapter(Context context, List<RewardShopModel> rewardShopModels) {
+  public RewardShopAdapter(Context context, List<Card> rewardShopModels) {
     this.context = context;
     this.rewardShopModels = rewardShopModels;
-    mFilteredList = this.rewardShopModels;
   }
 
   @Override public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,62 +41,30 @@ public class RewardShopAdapter extends BaseRecyclerAdapter<RewardShopAdapter.MyV
   }
 
   @Override public void onBindViewHolder(MyViewHolder holder, int position) {
-    GlideApp.with(context).load(mFilteredList.get(position).getImage()).into(holder.imgCardFirst);
-    holder.tvName.setText(mFilteredList.get(position).getTitle());
-    holder.tvRewardPoints.setText(context.getResources().getString(R.string.reward_pts, mFilteredList.get(position).getPoints()));
+    Card card = rewardShopModels.get(position);
+    GlideApp.with(context).load(card.getImageURL()).placeholder(R.drawable.ic_card_close).into(holder.imgCardFirst);
+    holder.tvName.setText(card.getName());
+    holder.setCard(card);
+    holder.tvRewardPoints.setText(context.getResources()
+        .getString(R.string.reward_pts, card.getPricePoints()));
   }
 
   @Override public int getItemCount() {
-    return mFilteredList.size();
+    return rewardShopModels.size();
   }
-  /**
-   * filter base on title
-   * @return filtered data
-   */
-  @Override public Filter getFilter() {
-    return new Filter() {
-      @Override protected FilterResults performFiltering(CharSequence charSequence) {
 
-        String charString = charSequence.toString();
-
-        if (charString.isEmpty()) {
-
-          mFilteredList = rewardShopModels;
-        } else {
-
-          ArrayList<RewardShopModel> filteredList = new ArrayList<>();
-
-          for (RewardShopModel model : rewardShopModels) {
-
-            if (model.getTitle().toLowerCase().contains(charString)) {
-
-              filteredList.add(model);
-            }
-          }
-
-          mFilteredList = filteredList;
-        }
-
-        FilterResults filterResults = new FilterResults();
-        filterResults.values = mFilteredList;
-        return filterResults;
-      }
-
-      @Override protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-        mFilteredList = (ArrayList<RewardShopModel>) filterResults.values;
-        notifyDataSetChanged();
-      }
-    };
-  }
 
   public class MyViewHolder extends BaseRecyclerAdapter.ViewHolder {
     @BindView(R.id.imgCardFirst) RoundedImageView imgCardFirst;
     @BindView(R.id.tvName) TextView tvName;
     @BindView(R.id.tvRewardPoints) TextView tvRewardPoints;
 
+    @Setter private Card card;
+
     public MyViewHolder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
+      itemView.setOnClickListener(view -> EventBus.getDefault().post(new BuyCardEvent(card, "open")));
     }
   }
 }

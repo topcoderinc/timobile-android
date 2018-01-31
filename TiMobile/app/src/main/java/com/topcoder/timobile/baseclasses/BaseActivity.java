@@ -18,6 +18,7 @@ package com.topcoder.timobile.baseclasses;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import com.topcoder.timobile.api.ApiService;
 import com.topcoder.timobile.dialogs.LoadingDialog;
@@ -48,8 +49,10 @@ public abstract class BaseActivity extends AppCompatActivity {
   }
 
   protected void showLoadingDialog() {
+    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
     loadingDialog = LoadingDialog.newInstance();
-    loadingDialog.show(getSupportFragmentManager(), null);
+    ft.add(loadingDialog, null);
+    ft.commitAllowingStateLoss();
     loadingDialog.setCancelListener(view -> cancelLoadingDialog());
   }
 

@@ -59,12 +59,12 @@
 
   <TextView
       android:id="@+id/tvStoryCompleted"
-      android:layout_width="20dp"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:gravity="end"
       android:textColor="@color/green"
       android:textSize="12sp"
-      tools:text="25"
+      tools:text="0"
       />
   <TextView
       android:id="@+id/tvTotalStory"
@@ -72,7 +72,7 @@
       android:layout_height="wrap_content"
       android:textColor="@color/hint_color"
       android:textSize="12sp"
-      tools:text="/25"
+      tools:text="/0"
 
       />
 

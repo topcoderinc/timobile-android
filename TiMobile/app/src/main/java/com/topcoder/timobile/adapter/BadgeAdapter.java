@@ -6,12 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import com.blankj.utilcode.util.ActivityUtils;
 import com.timobileapp.R;
 import com.topcoder.timobile.baseclasses.BaseRecyclerAdapter;
-import com.topcoder.timobile.model.BadgeModel;
+import com.topcoder.timobile.glide.GlideApp;
+import com.topcoder.timobile.model.UserBadge;
+
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Author: Harshvardhan
@@ -20,9 +25,9 @@ import java.util.List;
 
 public class BadgeAdapter extends BaseRecyclerAdapter<BadgeAdapter.MyViewHolder> {
   private final Context context;
-  private final List<BadgeModel> badgeModelList;
+  private final List<UserBadge> badgeModelList;
 
-  public BadgeAdapter(Context context, List<BadgeModel> badgeModelList) {
+  public BadgeAdapter(Context context, List<UserBadge> badgeModelList) {
     this.context = context;
     this.badgeModelList = badgeModelList;
   }
@@ -33,13 +38,12 @@ public class BadgeAdapter extends BaseRecyclerAdapter<BadgeAdapter.MyViewHolder>
   }
 
   @Override public void onBindViewHolder(MyViewHolder holder, int position) {
-    BadgeModel model = badgeModelList.get(position);
-    if (model.isActive()) {
-      holder.imgBadge.setImageResource(R.drawable.ic_active_badge);
-    } else {
-      holder.imgBadge.setImageResource(R.drawable.ic_disable_badge);
+    UserBadge model = badgeModelList.get(position);
+    if (model.getBadge() != null) {
+      GlideApp.with(ActivityUtils.getTopActivity())
+          .load(model.getBadge().getImageUrl()).placeholder(R.drawable.ic_active_badge).into(holder.imgBadge);
+      holder.tvName.setText(model.getBadge().getName());
     }
-    holder.tvName.setText(model.getTitle());
   }
 
   @Override public int getItemCount() {

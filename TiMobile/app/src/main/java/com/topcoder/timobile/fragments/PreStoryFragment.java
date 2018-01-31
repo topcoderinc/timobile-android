@@ -6,18 +6,27 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
 import com.blankj.utilcode.util.ToastUtils;
 import com.timobileapp.R;
 import com.topcoder.timobile.baseclasses.BaseFragment;
 import com.topcoder.timobile.customviews.CustomViewPager;
+import com.topcoder.timobile.utility.AppConstants;
+import com.topcoder.timobile.utility.AppUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import me.relex.circleindicator.CircleIndicator;
 
 /**
@@ -35,7 +44,11 @@ public class PreStoryFragment extends BaseFragment implements ViewPager.OnPageCh
   @BindView(R.id.tvRight) TextView tvRight;
 
   private String[] storyTitle;
+  private List<Fragment> fragments = new ArrayList<>();
   private MyPagerAdapter adapter;
+  private String TAG = PreStoryFragment.class.getName();
+  private int bookmarkCreateProgress = 0;
+  private int totalBookmarkNeedCreated = 0;
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_pre_story, container, false);
@@ -47,7 +60,13 @@ public class PreStoryFragment extends BaseFragment implements ViewPager.OnPageCh
     super.onViewCreated(view, savedInstanceState);
     setTitle(R.string.throughbred_insider);
     storyTitle = getResources().getStringArray(R.array.pre_story);
-    adapter = new MyPagerAdapter(getFragmentManager());
+
+    fragments.clear();
+    fragments.add(new AreaFragment());
+    fragments.add(new StateFragment());
+    fragments.add(new RaceTrackFragment());
+
+    adapter = new MyPagerAdapter(getFragmentManager(), fragments);
     pager.setAdapter(adapter);
     indicator.setViewPager(pager);
     tvStoryTitle.setText(storyTitle[0]);
@@ -55,7 +74,7 @@ public class PreStoryFragment extends BaseFragment implements ViewPager.OnPageCh
     pager.setPagingEnabled(false);
   }
 
-  @OnClick({ R.id.tvLeft, R.id.tvRight }) void onClick(View view) {
+  @OnClick({R.id.tvLeft, R.id.tvRight}) void onClick(View view) {
     int id = view.getId();
     int currentPage = pager.getCurrentItem();
     switch (id) {
@@ -74,15 +93,21 @@ public class PreStoryFragment extends BaseFragment implements ViewPager.OnPageCh
 
   /**
    * check validation
+   *
    * @return validation result
    */
   private boolean checkValidation() {
     int currentPage = pager.getCurrentItem();
     switch (currentPage) {
       case 1:
-
         StateFragment fragment = (StateFragment) adapter.getCurrentFragment();
-        return fragment.checkValidation();
+        boolean passed = fragment.checkValidation();
+        if (passed) {
+          RaceTrackFragment raceTrackFragment = (RaceTrackFragment) adapter.getItem(2);
+          raceTrackFragment.setStateIds(fragment.getStateIds());
+          raceTrackFragment.fetchRacetracks(true);
+        }
+        return passed;
       case 2:
         RaceTrackFragment raceTrackFragment = (RaceTrackFragment) adapter.getCurrentFragment();
         return raceTrackFragment.checkValidation();
@@ -108,12 +133,50 @@ public class PreStoryFragment extends BaseFragment implements ViewPager.OnPageCh
         break;
       case 2:
         if (checkValidation()) {
-          switchFragment(new StoryFragment(), false);
+          RaceTrackFragment raceTrackFragment = (RaceTrackFragment) adapter.getCurrentFragment();
+          this.createBookmarks(raceTrackFragment.getSelected());
         } else {
           ToastUtils.showShort("Select at least one racetrack");
         }
         break;
     }
+  }
+
+  /**
+   * create all bookmarks
+   *
+   * @param ids the bookmarks
+   */
+  private void createBookmarks(List<Long> ids) {
+    bookmarkCreateProgress = 0;
+    totalBookmarkNeedCreated = ids.size();
+    showLoadingDialog();
+    for (Long id : ids) {
+      apiService.createBookmark(id).subscribe(bookmark -> this.onOneBookmarkCreated(),
+          throwable -> this.onOneBookmarkCreated()); // ignore error
+    }
+    Log.d(TAG, "createBookmarks: " + ids);
+  }
+
+  /**
+   * one bookmark created
+   */
+  private void onOneBookmarkCreated() {
+    bookmarkCreateProgress += 1;
+    Log.d(TAG, "onOneBookmarkCreated: " + bookmarkCreateProgress + " / " + totalBookmarkNeedCreated);
+    if (bookmarkCreateProgress >= totalBookmarkNeedCreated) {
+      this.createBookMarksDone();
+    }
+  }
+
+  /**
+   * all bookmark created
+   */
+  private void createBookMarksDone() {
+    cancelLoadingDialog();
+    Log.d(TAG, "createBookMarksDone: all completed");
+    AppUtils.getPreferences().edit().putBoolean(AppConstants.DONT_SHOW_PRE_STORY_FRAGMENT, true).apply();
+    switchFragment(new StoryFragment(), false);
   }
 
   @Override public void onDestroyView() {
@@ -152,29 +215,21 @@ public class PreStoryFragment extends BaseFragment implements ViewPager.OnPageCh
   }
 
   public static class MyPagerAdapter extends FragmentPagerAdapter {
-    private static int NUM_ITEMS = 3;
+    private List<Fragment> fragments;
 
-    public MyPagerAdapter(FragmentManager fragmentManager) {
+    public MyPagerAdapter(FragmentManager fragmentManager, List<Fragment> fragments) {
       super(fragmentManager);
+      this.fragments = fragments;
     }
 
     // Returns total number of pages
     @Override public int getCount() {
-      return NUM_ITEMS;
+      return this.fragments.size();
     }
 
     // Returns the fragment to display for that page
     @Override public Fragment getItem(int position) {
-      switch (position) {
-        case 0:
-          return new AreaFragment();
-        case 1:
-          return new StateFragment();
-        case 2:
-          return new RaceTrackFragment();
-        default:
-          return null;
-      }
+      return this.fragments.get(position);
     }
 
     private Fragment mCurrentFragment;

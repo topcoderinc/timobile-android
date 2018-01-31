@@ -66,9 +66,8 @@ public abstract class BaseFragment extends Fragment {
 
   /**
    * show loading dialog
-   * @param stringResId text
    */
-  protected void showLoadingDialog(int stringResId) {
+  protected void showLoadingDialog() {
     loadingDialog = LoadingDialog.newInstance();
     loadingDialog.show(getActivity().getSupportFragmentManager(), null);
     loadingDialog.setCancelListener(view -> cancelLoadingDialog());

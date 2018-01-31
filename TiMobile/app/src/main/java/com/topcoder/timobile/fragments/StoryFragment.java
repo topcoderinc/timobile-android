@@ -1,5 +1,7 @@
 package com.topcoder.timobile.fragments;
 
+import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -8,22 +10,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.github.florent37.viewanimator.ViewAnimator;
@@ -43,12 +41,28 @@ import com.topcoder.timobile.adapter.StoryAdapter;
 import com.topcoder.timobile.baseclasses.BaseFragment;
 import com.topcoder.timobile.baseclasses.BaseRecyclerAdapter;
 import com.topcoder.timobile.glide.GlideApp;
+import com.topcoder.timobile.model.PageResult;
 import com.topcoder.timobile.model.PreStorySampleModel;
-import com.topcoder.timobile.model.StoryModel;
+import com.topcoder.timobile.model.TrackStory;
+import com.topcoder.timobile.model.event.LocationUpdatedEvent;
+import com.topcoder.timobile.utility.AppConstants;
+import com.topcoder.timobile.utility.AppUtils;
+import com.topcoder.timobile.utility.LoadMore;
+import com.topcoder.timobile.utility.OnLoadMoreListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.collections4.IterableUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import lombok.Setter;
 import timber.log.Timber;
+
 
 /**
  * Author: Harshvardhan
@@ -65,11 +79,12 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
   @BindView(R.id.map) MapView mMapView;
   @BindView(R.id.linearTile) LinearLayout linearTile;
   @BindView(R.id.imgDown) ImageView imgDown;
+  @BindView(R.id.tvStoryTips) TextView tvStoryTips;
   Unbinder unbinder;
   private List<PreStorySampleModel> preStorySampleModels = new ArrayList<>();
   private PreStoryListAdapter raceTrackAdapter;
 
-  private List<StoryModel> storyModelList = new ArrayList<>();
+  private List<TrackStory> storyModelList = new ArrayList<>();
   private StoryAdapter storyAdapter;
   private Menu menu;
   private boolean isList = true;
@@ -77,15 +92,38 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
   private GoogleMap map;
   private Marker lastClickedMarker = null;
   private ViewHolder bottomTileHolder;
+  private LoadMore loadMore;
+
+  /**
+   * search string
+   */
+  private String filterSearchString = null;
+
+  /**
+   * the filter racetrack ids
+   */
+  private String filterRacetrackIds = null;
+
+  /**
+   * the stories offset.
+   */
+  private int offset = 0;
+  private int total = 0;
+  private String TAG = StoryFragment.class.getName();
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    EventBus.getDefault().register(this);
     setHasOptionsMenu(true);
   }
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_story_location, container, false);
     unbinder = ButterKnife.bind(this, view);
+    loadMore = new LoadMore(recyclerView);
+    loadMore.setOnLoadMoreListener(() -> {
+      fetchStories(false);
+    });
     return view;
   }
 
@@ -102,61 +140,123 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     filterRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     filterRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-
-    apiService.getStoryList().subscribe(this::onSuccess, this::onError);
-    apiService.raceTrackList().subscribe(this::onTrackSuccess, this::onTrackError);
+    fetchStories(false);
+    fetchRacetracks();
   }
+
+  private void fetchRacetracks() {
+    Location location = AppUtils.getCurrentLocation();
+    Float lat = location == null ? null : ((float) location.getLatitude());
+    Float lng = location == null ? null : ((float) location.getLongitude());
+    apiService.getRacetracks(null, null,
+        AppConstants.SEARCH_RACETRACKS_DISTANCE_IN_M, lat, lng, offset, AppConstants.DEFAULT_LIMIT,
+        "name", "asc")
+        .subscribe(this::onTrackSuccess, this::onTrackError);
+  }
+
+  /**
+   * fetch stories from backend.
+   *
+   * @param needClear is that need clear exist stories.
+   */
+  private void fetchStories(boolean needClear) {
+    if (needClear) {
+      offset = 0;
+      mMarkerList.clear();
+      storyModelList.clear();
+    }
+    apiService.getTrackStories(filterSearchString, null, filterRacetrackIds,
+        null, offset, AppConstants.DEFAULT_LIMIT, null, null)
+        .subscribe(storyPageResult -> {
+              loadMore.loadedDone();
+              this.onSuccess(storyPageResult, needClear);
+            }
+            , throwable -> {
+              loadMore.loadedDone();
+              this.onError(throwable);
+            });
+  }
+
 
   private void onError(Throwable throwable) {
-    Timber.e(throwable);
-    ToastUtils.showShort(R.string.error);
+    Timber.d(throwable);
+    AppUtils.showError(throwable, getString(R.string.error));
   }
 
-  private void onSuccess(List<StoryModel> storyModels) {
-    storyModelList.addAll(storyModels);
-    storyAdapter = new StoryAdapter(getActivity(), storyModelList);
-    recyclerView.setAdapter(storyAdapter);
-    storyAdapter.setRecycleOnItemClickListner(recycleOnItemClickListener);
+  private void onSuccess(PageResult<TrackStory> trackStoryList, boolean needClear) {
+    total = trackStoryList.getTotal();
+    offset += trackStoryList.getItems().size();
+    if (needClear) {
+      offset = trackStoryList.getItems().size();
+      storyModelList.clear();
+    }
+    storyModelList.addAll(trackStoryList.getItems());
+    if (storyAdapter == null) {
+      storyAdapter = new StoryAdapter(getActivity(), storyModelList);
+      recyclerView.setAdapter(storyAdapter);
+      storyAdapter.setRecycleOnItemClickListner(recycleOnItemClickListener);
+    } else {
+      storyAdapter.notifyDataSetChanged();
+    }
+
+    if (!isList) {
+      initMarker();
+    }
+    tvStoryTips.setText(String.format(getString(R.string.map_story_tips), storyModelList.size(), total));
   }
 
-  BaseRecyclerAdapter.RecycleOnItemClickListener recycleOnItemClickListener = (view, position) -> ActivityUtils.startActivity(BrowseStoryActivity.class);
+  BaseRecyclerAdapter.RecycleOnItemClickListener recycleOnItemClickListener = (view, position) -> {
+    Long id = storyModelList.get(position).getId();
+    Intent intent = new Intent(ActivityUtils.getTopActivity(), BrowseStoryActivity.class);
+    intent.putExtra(BrowseStoryActivity.PASS_STORY_KEY, id);
+    ActivityUtils.startActivity(intent);
+  };
+
 
   private void onTrackError(Throwable throwable) {
     Timber.e(throwable);
     ToastUtils.showShort(R.string.error);
   }
 
-  private void onTrackSuccess(List<PreStorySampleModel> preStorySampleModels) {
+  private void onTrackSuccess(PageResult<PreStorySampleModel> pageResult) {
     PreStorySampleModel storySampleModel = new PreStorySampleModel();
     storySampleModel.setId(0);
-    storySampleModel.setName("All Racetracks");
+    storySampleModel.setValue("All Racetracks");
     storySampleModel.setCheck(false);
     this.preStorySampleModels.add(storySampleModel);
-    this.preStorySampleModels.addAll(preStorySampleModels);
+    this.preStorySampleModels.addAll(pageResult.getItems());
     raceTrackAdapter = new PreStoryListAdapter(getActivity(), this.preStorySampleModels);
     filterRecyclerView.setAdapter(raceTrackAdapter);
     raceTrackAdapter.setRecycleOnItemClickListner(this);
-    tvSelectTrack.setText(storySampleModel.getName());
+    tvSelectTrack.setText(storySampleModel.getValue());
   }
 
-  @OnClick({ R.id.relativeRaceTrack, R.id.relativeSortBy }) void onFilter(View view) {
+  @OnClick({R.id.relativeRaceTrack, R.id.relativeSortBy}) void onFilter(View view) {
     int id = view.getId();
     switch (id) {
       case R.id.relativeRaceTrack:
-        if (filterRecyclerView.isShown()) {
-          hide(filterRecyclerView, false);
-          imgDown.setRotation(0);
-        } else {
-          imgDown.setRotation(180);
-          show(filterRecyclerView, false);
-        }
+        this.toggleRaceTrackFilterPanel();
         break;
     }
   }
 
   /**
+   * toggle filter panel
+   */
+  private void toggleRaceTrackFilterPanel() {
+    if (filterRecyclerView.isShown()) {
+      hide(filterRecyclerView, false);
+      imgDown.setRotation(0);
+    } else {
+      imgDown.setRotation(180);
+      show(filterRecyclerView, false);
+    }
+  }
+
+  /**
    * show view animation
-   * @param view view
+   *
+   * @param view     view
    * @param positive for positive height
    */
   private void show(final View view, boolean positive) {
@@ -171,7 +271,8 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
 
   /**
    * hide view animation
-   * @param view view
+   *
+   * @param view     view
    * @param positive for positive height
    */
   private void hide(final View view, boolean positive) {
@@ -189,7 +290,6 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     unbinder.unbind();
   }
 
-  private List<PreStorySampleModel> selectedRaceTrack = new ArrayList<>();
 
   @Override public void onItemClick(View view, int position) {
     PreStorySampleModel sampleModel = preStorySampleModels.get(position);
@@ -198,23 +298,28 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     lastClickedMarker = null;
     if (position == 0) {
       onFilter(relativeRaceTrack);
-      selectedRaceTrack.clear();
-      storyAdapter.setData(storyModelList);
-      initMarker(storyModelList);
       unCheckList();
+      filterRacetrackIds = null;
+      fetchStories(true);
     } else {
-      PreStorySampleModel model = IterableUtils.find(selectedRaceTrack, object -> sampleModel.getName().equalsIgnoreCase(object.getName()));
-      if (model != null) {
-        sampleModel.setCheck(false);
-        selectedRaceTrack.remove(model);
-      } else {
-        sampleModel.setCheck(true);
-        selectedRaceTrack.add(sampleModel);
-      }
+      sampleModel.setCheck(!sampleModel.isCheck());
       raceTrackAdapter.notifyItemChanged(position);
-      filterList(selectedRaceTrack);
+      StringBuilder ids = new StringBuilder();
+      for (PreStorySampleModel preStorySampleModel : preStorySampleModels) {
+        if (preStorySampleModel.isCheck()) {
+          ids.append(preStorySampleModel.getId()).append(",");
+        }
+      }
+      Log.d(TAG, "onItemClick: filterRacetrackIds = " + ids.toString());
+      if (ids.length() == 0) { // unselected all
+        filterRacetrackIds = null;
+        fetchStories(true);
+      } else {
+        filterRacetrackIds = ids.toString().substring(0, ids.length() - 1);
+        fetchStories(true);
+      }
     }
-    tvSelectTrack.setText(sampleModel.getName());
+    tvSelectTrack.setText(sampleModel.getValue());
   }
 
   /**
@@ -227,19 +332,6 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     raceTrackAdapter.notifyDataSetChanged();
   }
 
-  /**
-   * filter list for selected racetrack
-   * @param selectModels selected racetrack
-   */
-  private void filterList(List<PreStorySampleModel> selectModels) {
-    List<StoryModel> storyModelArrayList = new ArrayList<>();
-    for (PreStorySampleModel model : selectModels) {
-      Iterable<StoryModel> modelList = IterableUtils.filteredIterable(storyModelList, object -> model.getName().equalsIgnoreCase(object.getRaceCourse()));
-      storyModelArrayList.addAll(IterableUtils.toList(modelList));
-    }
-    storyAdapter.setData(storyModelArrayList);
-    initMarker(storyModelArrayList);
-  }
 
   @Override public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
     this.menu = menu;
@@ -248,22 +340,17 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     final SearchView searchView = (SearchView) myActionMenuItem.getActionView();
     searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
       @Override public boolean onQueryTextSubmit(String query) {
-
         return false;
       }
 
       @Override public boolean onQueryTextChange(String newText) {
         lastClickedMarker = null;
         if (TextUtils.isEmpty(newText)) {
-          storyAdapter.setData(storyModelList);
-          initMarker(storyModelList);
+          filterSearchString = null;
         } else {
-          if (linearTile.isShown()) {
-            lastClickedMarker = null;
-            hide(linearTile, true);
-          }
-          filterable.getFilter().filter(newText);
+          filterSearchString = newText;
         }
+        fetchStories(true);
         return true;
       }
     });
@@ -288,40 +375,66 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
           menu.getItem(1).setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_list));
           mMapView.setVisibility(View.VISIBLE);
           recyclerView.setVisibility(View.GONE);
-
-          if (mMarkerList.isEmpty()) {
-            initMarker(storyModelList);
-          }
+          initMarker();
         }
-
         break;
     }
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * when location changed
+   *
+   * @param event
+   */
+  @Subscribe public void onLocationUpdated(LocationUpdatedEvent event) {
+    storyAdapter.notifyDataSetChanged();
+    if (!isList) {
+      initMarker();
+    }
+  }
+
   @Override public void onMapReady(GoogleMap map) {
+    Log.d(TAG, "onMapReady: " + map);
     this.map = map;
     this.map.setOnMarkerClickListener(this);
   }
 
   /**
    * add markers on map
-   *
-   * @param storyModelList story model for locations
    */
-  private void initMarker(List<StoryModel> storyModelList) {
+  private void initMarker() {
+    if (map == null) {
+      ToastUtils.showShort("Google map init failed, please make sure you installed google Play store");
+      return;
+    }
+
     map.clear();
     if (storyModelList.isEmpty()) return;
+
     LatLngBounds.Builder latLongBounds = new LatLngBounds.Builder();
-    for (StoryModel model : storyModelList) {
-      LatLng latlng = new LatLng(Double.parseDouble(model.getLat()), Double.parseDouble(model.getLng()));
+
+    for (TrackStory model : storyModelList) {
+      if (model.getRacetrack() == null
+          || model.getRacetrack().getLocationLat() == null
+          || model.getRacetrack().getLocationLng() == null) {
+        continue;
+      }
+
+      LatLng latlng = new LatLng(model.getRacetrack().getLocationLat(), model.getRacetrack().getLocationLng());
       latLongBounds.include(latlng);
-      Marker marker = map.addMarker(new MarkerOptions().position(latlng).title(model.getTitle()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_green)));
+      Marker marker = map.addMarker(new MarkerOptions().position(latlng).title(model.getTitle())
+          .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_green)));
       marker.setTag(model);
       mMarkerList.add(marker);
     }
+
     LatLngBounds bounds = latLongBounds.build();
-    map.setOnMapLoadedCallback(() -> map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 50)));
+    int width = getResources().getDisplayMetrics().widthPixels;
+    int height = getResources().getDisplayMetrics().heightPixels
+        - (int) AppUtils.convertDpToPixel(220, ActivityUtils.getTopActivity());
+    int padding = (int) (width * 0.05); // offset from edges of the map 5% of screen
+    map.setOnMapLoadedCallback(() -> map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding)));
   }
 
   /**
@@ -340,8 +453,10 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_orange));
     lastClickedMarker = marker;
     show(linearTile, true);
-    StoryModel model = (StoryModel) marker.getTag();
-    setData(model);
+    TrackStory model = (TrackStory) marker.getTag();
+    if (model != null) {
+      setMapData(model);
+    }
     return true;
   }
 
@@ -353,54 +468,33 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     @BindView(R.id.tvChapter) TextView tvChapter;
     @BindView(R.id.tvCard) TextView tvCard;
     @BindView(R.id.tvDistance) TextView tvDistance;
+    @Setter private TrackStory story;
 
     public ViewHolder(View itemView) {
       ButterKnife.bind(this, itemView);
-      itemView.setOnClickListener(v -> ActivityUtils.startActivity(BrowseStoryActivity.class));
-    }
-  }
-
-  private void setData(StoryModel model) {
-    GlideApp.with(this).load(model.getImage()).into(bottomTileHolder.imgStory);
-    bottomTileHolder.tvStoryTitle.setText(model.getTitle());
-    bottomTileHolder.tvRaceCourse.setText(model.getRaceCourse());
-    bottomTileHolder.tvDescription.setText(model.getDescription());
-    bottomTileHolder.tvChapter.setText(getResources().getQuantityString(R.plurals.chapter, Integer.parseInt(model.getChapter()), model.getChapter()));
-    bottomTileHolder.tvCard.setText(getResources().getQuantityString(R.plurals.card, Integer.parseInt(model.getCard()), model.getCard()));
-    bottomTileHolder.tvDistance.setText(getResources().getQuantityString(R.plurals.distance, Integer.parseInt(model.getDistance()), model.getDistance()));
-  }
-
-  private List<StoryModel> mFilteredList = new ArrayList<>();
-
-  //search filter
-  Filterable filterable = () -> new Filter() {
-    @Override protected FilterResults performFiltering(CharSequence charSequence) {
-
-      String charString = charSequence.toString();
-
-      ArrayList<StoryModel> filteredList = new ArrayList<>();
-
-      for (StoryModel model : storyModelList) {
-
-        if (model.getTitle().toLowerCase().contains(charString) || model.getDescription().toLowerCase().contains(charString) || model.getRaceCourse().toLowerCase().contains(charSequence)) {
-
-          filteredList.add(model);
+      itemView.setOnClickListener(v -> {
+        if (story == null) {
+          ToastUtils.showShort("story is null, cannot jump");
+          return;
         }
-      }
-
-      mFilteredList = filteredList;
-
-      FilterResults filterResults = new FilterResults();
-      filterResults.values = mFilteredList;
-      return filterResults;
+        Intent intent = new Intent(ActivityUtils.getTopActivity(), BrowseStoryActivity.class);
+        intent.putExtra(BrowseStoryActivity.PASS_STORY_KEY, story.getId());
+        ActivityUtils.startActivity(intent);
+      });
     }
+  }
 
-    @Override protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-      mFilteredList = (ArrayList<StoryModel>) filterResults.values;
-      storyAdapter.setData(mFilteredList);
-      initMarker(mFilteredList);
-    }
-  };
+  private void setMapData(TrackStory model) {
+    GlideApp.with(this).load(model.getSmallImageURL()).into(bottomTileHolder.imgStory);
+    bottomTileHolder.setStory(model);
+    bottomTileHolder.tvStoryTitle.setText(model.getTitle());
+    bottomTileHolder.tvRaceCourse.setText(model.getSubtitle());
+    bottomTileHolder.tvDescription.setText(model.getDescription());
+    bottomTileHolder.tvChapter.setText(getResources().getQuantityString(R.plurals.chapter, model.getChapters().size(), model.getChapters().size()));
+    bottomTileHolder.tvCard.setText(getResources().getQuantityString(R.plurals.card, model.getCards().size(), model.getCards().size()));
+    bottomTileHolder.tvDistance.setText(AppUtils.getDistance(model.getRacetrack()));
+  }
+
 
   @Override public void onResume() {
     if (mMapView != null) mMapView.onResume();
@@ -409,6 +503,7 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
 
   @Override public void onDestroy() {
     if (mMapView != null) mMapView.onDestroy();
+    EventBus.getDefault().unregister(this);
     super.onDestroy();
   }
 
