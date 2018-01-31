@@ -164,6 +164,7 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
       offset = 0;
       mMarkerList.clear();
       storyModelList.clear();
+      bottomTileHolder.hide();
     }
     apiService.getTrackStories(filterSearchString, null, filterRacetrackIds,
         null, offset, AppConstants.DEFAULT_LIMIT, null, null)
@@ -470,8 +471,24 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     @BindView(R.id.tvDistance) TextView tvDistance;
     @Setter private TrackStory story;
 
+    @Setter View view;
+
+    public void hide() {
+      if (this.view != null) {
+        this.view.setVisibility(View.INVISIBLE);
+      }
+    }
+
+
+    public void show() {
+      if (this.view != null) {
+        this.view.setVisibility(View.VISIBLE);
+      }
+    }
+
     public ViewHolder(View itemView) {
       ButterKnife.bind(this, itemView);
+      this.view = itemView;
       itemView.setOnClickListener(v -> {
         if (story == null) {
           ToastUtils.showShort("story is null, cannot jump");
@@ -485,6 +502,7 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
   }
 
   private void setMapData(TrackStory model) {
+    bottomTileHolder.show();
     GlideApp.with(this).load(model.getSmallImageURL()).into(bottomTileHolder.imgStory);
     bottomTileHolder.setStory(model);
     bottomTileHolder.tvStoryTitle.setText(model.getTitle());
