@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.timobileapp.R;
 import com.topcoder.timobile.baseclasses.BaseRecyclerAdapter;
 import com.topcoder.timobile.glide.GlideApp;
-import com.topcoder.timobile.model.CommentModel;
+import com.topcoder.timobile.model.Comment;
+
 import java.util.List;
 
 /**
@@ -23,9 +26,9 @@ import java.util.List;
 public class CommentAdapter extends BaseRecyclerAdapter<CommentAdapter.MyViewHolder> {
 
   private final Context context;
-  private final List<CommentModel> commentModelList;
+  private final List<Comment> commentModelList;
 
-  public CommentAdapter(Context context, List<CommentModel> commentModelList) {
+  public CommentAdapter(Context context, List<Comment> commentModelList) {
     this.context = context;
     this.commentModelList = commentModelList;
   }
@@ -36,11 +39,15 @@ public class CommentAdapter extends BaseRecyclerAdapter<CommentAdapter.MyViewHol
   }
 
   @Override public void onBindViewHolder(MyViewHolder holder, int position) {
-    CommentModel model = commentModelList.get(position);
-    GlideApp.with(context).load(model.getUserProfileImageUrl()).into(holder.imgComment);
-    holder.tvComment.setText(model.getMessage());
-    holder.tvTimeStamp.setText(TimeAgo.using(model.getDate()*1000)); // convert into milliseconds
-    holder.tvUserName.setText(model.getUserName());
+    Comment model = commentModelList.get(position);
+    if (model.getUser() != null) {
+      holder.tvUserName.setText(model.getUser().getName());
+      GlideApp.with(context).load(model.getUser().getProfilePhotoURL())
+          .placeholder(R.drawable.ic_story_ph).into(holder.imgComment);
+    }
+    holder.tvComment.setText(model.getText());
+    holder.tvTimeStamp.setText(TimeAgo.using(model.getCreatedAt().getTime()));
+
   }
 
   @Override public int getItemCount() {

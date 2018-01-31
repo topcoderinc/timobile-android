@@ -16,6 +16,8 @@
       >
 
     <TextView
+        android:id="@+id/tvRewardTitle"
+        style="@style/BoldFont"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -23,9 +25,7 @@
         android:gravity="center"
         android:text="@string/congratulations_card"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        style="@style/BoldFont"
-        />
+        android:textSize="22sp" />
 
 
     <LinearLayout

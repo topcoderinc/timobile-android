@@ -5,13 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import com.blankj.utilcode.util.ActivityUtils;
 import com.timobileapp.R;
 import com.topcoder.timobile.baseclasses.BaseRecyclerAdapter;
 import com.topcoder.timobile.customviews.roundimageview.RoundedImageView;
 import com.topcoder.timobile.glide.GlideApp;
-import com.topcoder.timobile.model.TradingCardModel;
+import com.topcoder.timobile.model.UserCard;
+
 import java.util.List;
 
 /**
@@ -20,11 +24,9 @@ import java.util.List;
  */
 
 public class TradingCardAdapter extends BaseRecyclerAdapter<TradingCardAdapter.MyViewHolder> {
-  private final Context context;
-  private final List<TradingCardModel> tradingCardModels;
+  private final List<UserCard> tradingCardModels;
 
-  public TradingCardAdapter(Context context, List<TradingCardModel> tradingCardModels) {
-    this.context = context;
+  public TradingCardAdapter(List<UserCard> tradingCardModels) {
     this.tradingCardModels = tradingCardModels;
   }
 
@@ -34,13 +36,13 @@ public class TradingCardAdapter extends BaseRecyclerAdapter<TradingCardAdapter.M
   }
 
   @Override public void onBindViewHolder(MyViewHolder holder, int position) {
-    TradingCardModel model = tradingCardModels.get(position);
-    if (model.isActive()) {
-      GlideApp.with(context).load(model.getImage()).into(holder.imgReward);
-    } else {
-      holder.imgReward.setImageResource(R.drawable.ic_card_close);
+    UserCard model = tradingCardModels.get(position);
+    if (model.getCard() != null) {
+      GlideApp.with(ActivityUtils.getTopActivity())
+          .load(model.getCard().getImageURL()).placeholder(R.drawable.ic_card_close).into(holder.imgReward);
+      holder.tvName.setText(model.getCard().getName());
     }
-    holder.tvName.setText(model.getTitle());
+
   }
 
   @Override public int getItemCount() {

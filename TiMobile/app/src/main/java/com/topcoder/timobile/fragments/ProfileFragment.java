@@ -17,21 +17,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
 import com.blankj.utilcode.util.ActivityUtils;
 import com.timobileapp.R;
+import com.topcoder.timobile.activity.HomeActivity;
 import com.topcoder.timobile.activity.ProfileSettingsActivity;
 import com.topcoder.timobile.baseclasses.BaseFragment;
 import com.topcoder.timobile.glide.GlideApp;
-import com.topcoder.timobile.model.AchievementModel;
+import com.topcoder.timobile.model.StoryProgress;
 import com.topcoder.timobile.model.User;
-import com.topcoder.timobile.utility.AppConstants;
+import com.topcoder.timobile.model.UserBadge;
+import com.topcoder.timobile.model.UserCard;
+import com.topcoder.timobile.model.event.FragmentSwitchEvent;
+import com.topcoder.timobile.model.event.UserUpdateEvent;
+import com.topcoder.timobile.utility.AppUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import timber.log.Timber;
 
 /**
@@ -54,10 +67,11 @@ public class ProfileFragment extends BaseFragment {
   @BindView(R.id.tvCardCount) TextView tvCardCount;
   @BindView(R.id.linearAchievements) LinearLayout linearAchievements;
   Unbinder unbinder;
-  private User user;
+  private ViewPagerAdapter adapter;
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    EventBus.getDefault().register(this);
     setHasOptionsMenu(true);
   }
 
@@ -73,26 +87,79 @@ public class ProfileFragment extends BaseFragment {
     setupViewPager(pager);
     tabLayout.setupWithViewPager(pager);
     changeTabsFont(tabLayout);
-    apiService.getUser().subscribe(this::onUser, this::onError);
-    apiService.getAchievements().subscribe(this::onSuccess, this::onError);
+
+    this.onUser(apiService.getCurrentUser()); // use cache fill first
+    apiService.getUser().subscribe(this::onUser, this::onError); // fetch backend current user
+
+    apiService.getCurrentUserStoryProgresses().subscribe(storyProgresses -> {  //completed stories count
+      int count = 0;
+      for (StoryProgress progress : storyProgresses) {
+        if (progress.getCompleted()) count++;
+      }
+      tvStoriesCount.setText(String.valueOf(count));
+    }, this::onError);
+
+    apiService.countComments(apiService.getCurrentUser().getId()) // count reviews
+        .subscribe(itemCount -> tvReviewCount.setText(String.valueOf(itemCount.getCount())), this::onError);
+
+
+    apiService.getCurrentUserBadge().subscribe(this::onUserBadgeLoaded, this::onError);
+    apiService.getCurrentUserCard().subscribe(this::onUserCardLoaded, this::onError);
+
+  }
+
+  /**
+   * update user event
+   *
+   * @param event the event
+   */
+  @Subscribe public void updateUserEvent(UserUpdateEvent event) {
+    this.onUser(apiService.getCurrentUser());
+  }
+
+  /**
+   * goto switch fragment
+   *
+   * @param event the event with fragment
+   */
+  @Subscribe public void fragmentSwitchEvent(FragmentSwitchEvent event) {
+    ((HomeActivity) getActivity()).checkNavItem(event.getNavId());
+    switchFragment(event.getBaseFragment(), false);
   }
 
   private void onUser(User user) {
-    this.user = user;
-    GlideApp.with(this).load(user.getProfileImage()).into(profileImage);
+    if (user.getProfilePhotoURL() != null) {
+      GlideApp.with(this).load(user.getProfilePhotoURL()).into(profileImage);
+    }
     tvUserName.setText(user.getName());
     tvUserEmail.setText(user.getEmail());
   }
 
   private void onError(Throwable throwable) {
     Timber.d(throwable);
+    AppUtils.showError(throwable, getString(R.string.error));
   }
 
-  private void onSuccess(AchievementModel achievementModel) {
-    tvReviewCount.setText(String.valueOf(achievementModel.getReviews()));
-    tvBadgeCount.setText(String.valueOf(achievementModel.getBadges()));
-    tvStoriesCount.setText(String.valueOf(achievementModel.getStories()));
-    tvCardCount.setText(String.valueOf(achievementModel.getCards()));
+  /**
+   * user badges fetched
+   *
+   * @param userBadges the user badges
+   */
+  private void onUserBadgeLoaded(List<UserBadge> userBadges) {
+    tvBadgeCount.setText(String.valueOf(userBadges.size()));
+    BadgeFragment fragment = (BadgeFragment) adapter.getItem(0);
+    fragment.onSuccess(userBadges);
+  }
+
+  /**
+   * the user cards fetched
+   *
+   * @param userCards the user cards
+   */
+  private void onUserCardLoaded(List<UserCard> userCards) {
+    tvCardCount.setText(String.valueOf(userCards.size()));
+    TradingFragment fragment = (TradingFragment) adapter.getItem(1);
+    fragment.onSuccess(userCards);
   }
 
   @OnClick(R.id.linearStoryProgress) void onClick() {
@@ -111,7 +178,7 @@ public class ProfileFragment extends BaseFragment {
   }
 
   private void setupViewPager(ViewPager viewPager) {
-    ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+    adapter = new ViewPagerAdapter(getChildFragmentManager());
     adapter.addFragment(new BadgeFragment(), "Badges");
     adapter.addFragment(new TradingFragment(), "Trading Cards");
     viewPager.setAdapter(adapter);
@@ -148,12 +215,16 @@ public class ProfileFragment extends BaseFragment {
     inflater.inflate(R.menu.profile_menu, menu);
   }
 
+  @Override public void onDestroy() {
+    EventBus.getDefault().unregister(this);
+    super.onDestroy();
+  }
+
   @Override public boolean onOptionsItemSelected(MenuItem item) {
     int id = item.getItemId();
     switch (id) {
       case R.id.settings:
         Intent intent = new Intent(getActivity(), ProfileSettingsActivity.class);
-        intent.putExtra(AppConstants.KEY_OBJ, user);
         ActivityUtils.startActivity(intent);
         break;
     }

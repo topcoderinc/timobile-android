@@ -6,12 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 import com.timobileapp.R;
 import com.topcoder.timobile.baseclasses.BaseRecyclerAdapter;
 import com.topcoder.timobile.glide.GlideApp;
-import com.topcoder.timobile.model.StoryModel;
+import com.topcoder.timobile.model.TrackStory;
+import com.topcoder.timobile.utility.AppUtils;
+
 import java.util.List;
 
 /**
@@ -22,9 +26,9 @@ import java.util.List;
 public class StoryAdapter extends BaseRecyclerAdapter<StoryAdapter.MyViewHolder> {
 
   private final Context context;
-  private  List<StoryModel> storyModelList;
+  private List<TrackStory> storyModelList;
 
-  public StoryAdapter(Context context, List<StoryModel> storyModelList) {
+  public StoryAdapter(Context context, List<TrackStory> storyModelList) {
     this.context = context;
     this.storyModelList = storyModelList;
   }
@@ -34,20 +38,20 @@ public class StoryAdapter extends BaseRecyclerAdapter<StoryAdapter.MyViewHolder>
     return new MyViewHolder(view);
   }
 
-  public void setData(List<StoryModel> storyModelList) {
+  public void setData(List<TrackStory> storyModelList) {
     this.storyModelList = storyModelList;
     notifyDataSetChanged();
   }
 
   @Override public void onBindViewHolder(MyViewHolder holder, int position) {
-    StoryModel model = storyModelList.get(position);
-    GlideApp.with(context).load(model.getImage()).into(holder.imgStory);
+    TrackStory model = storyModelList.get(position);
+    GlideApp.with(context).load(model.getSmallImageURL()).into(holder.imgStory);
     holder.tvStoryTitle.setText(model.getTitle());
-    holder.tvRaceCourse.setText(model.getRaceCourse());
+    holder.tvRaceCourse.setText(model.getSubtitle());
     holder.tvDescription.setText(model.getDescription());
-    holder.tvChapter.setText(context.getResources().getQuantityString(R.plurals.chapter, Integer.parseInt(model.getChapter()), model.getChapter()));
-    holder.tvCard.setText(context.getResources().getQuantityString(R.plurals.card, Integer.parseInt(model.getCard()), model.getCard()));
-    holder.tvDistance.setText(context.getResources().getQuantityString(R.plurals.distance, Integer.parseInt(model.getDistance()), model.getDistance()));
+    holder.tvChapter.setText(context.getResources().getQuantityString(R.plurals.chapter, model.getChapters().size(), model.getChapters().size()));
+    holder.tvCard.setText(context.getResources().getQuantityString(R.plurals.card, model.getCards().size(), model.getCards().size()));
+    holder.tvDistance.setText(AppUtils.getDistance(model.getRacetrack()));
   }
 
   @Override public int getItemCount() {

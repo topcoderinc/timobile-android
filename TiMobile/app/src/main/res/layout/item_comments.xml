@@ -37,13 +37,13 @@
       />
 
   <ImageView
-      android:id="@+id/imgMenu"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignParentRight="true"
-      android:layout_margin="@dimen/_10sdp"
-      android:src="@drawable/ic_menu_dot"
-      />
+    android:id="@+id/imgMenu"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignBottom="@+id/tvUserName"
+    android:layout_alignParentEnd="true"
+    android:layout_marginEnd="12dp"
+    android:src="@drawable/ic_menu_dot" />
 
   <TextView
       android:id="@+id/tvComment"

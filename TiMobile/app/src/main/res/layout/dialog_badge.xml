@@ -2,51 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
     android:background="@color/white"
-    >
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
-  <ImageView
-      android:layout_width="@dimen/_90sdp"
-      android:layout_height="@dimen/_90sdp"
-      android:layout_marginTop="@dimen/_20sdp"
-      android:src="@drawable/ic_active_badge"
-      />
+    <ImageView
+        android:id="@+id/imgBadge"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:src="@drawable/ic_active_badge" />
 
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/_10sdp"
-      android:text="Badge Name Lorem Ipsum"
-      android:textColor="@color/heavy_orange"
-      android:textSize="14sp"
-      style="@style/BoldFont"
-      />
+    <TextView
+        android:id="@+id/tvBadgeTitle"
+        style="@style/BoldFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Badge Name Lorem Ipsum"
+        android:textColor="@color/heavy_orange"
+        android:textSize="14sp" />
 
-  <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="@dimen/_20sdp"
-      android:layout_marginRight="@dimen/_20sdp"
-      android:layout_marginTop="@dimen/_10sdp"
-      android:ellipsize="end"
-      android:gravity="center"
-      android:maxLines="3"
-      android:text="@string/dummy_text"
-      android:textColor="@color/dark_gray"
-      android:textSize="14sp"
-      />
+    <TextView
+        android:id="@+id/tvBadgeDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="3"
+        android:text="@string/dummy_text"
+        android:textColor="@color/dark_gray"
+        android:textSize="14sp" />
 
-  <Button
-      android:id="@+id/btnShare"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="@dimen/_30sdp"
-      android:background="@color/blue_indicator"
-      android:text="@string/share"
-      android:textColor="@color/white"
-      style="@style/SemiBoldFont"
-      />
+    <Button
+        android:id="@+id/btnShare"
+        style="@style/SemiBoldFont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:background="@color/blue_indicator"
+        android:text="@string/share"
+        android:textColor="@color/white" />
 
 </LinearLayout>

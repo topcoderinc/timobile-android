@@ -169,11 +169,12 @@
     <include layout="@layout/item_story"/>
 
     <TextView
+        android:id="@+id/tvStoryTips"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="Displaying 5 of 5 stories in this area"
+        android:text="@string/map_story_tips"
         android:textColor="@color/white"
         android:textSize="12sp"
         />

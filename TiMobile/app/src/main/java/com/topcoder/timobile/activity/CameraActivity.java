@@ -3,6 +3,7 @@ package com.topcoder.timobile.activity;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,6 +26,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.blankj.utilcode.util.ActivityUtils;
 import com.google.android.cameraview.AspectRatio;
 import com.google.android.cameraview.CameraView;
@@ -34,11 +36,13 @@ import com.topcoder.timobile.glide.GlideApp;
 import com.topcoder.timobile.model.event.FinishEvent;
 import com.topcoder.timobile.model.event.PhotoEvent;
 import com.topcoder.timobile.utility.AppConstants;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Set;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -75,6 +79,8 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
   private boolean isFromProfile;
 
+  private String intentStringValue;
+
   private View.OnClickListener mOnClickListener = new View.OnClickListener() {
     @Override public void onClick(View v) {
       switch (v.getId()) {
@@ -89,16 +95,21 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
           break;
         case R.id.tvFinish:
           if (isFromProfile) {
-            EventBus.getDefault().post(new PhotoEvent(file.getAbsolutePath()));
+            Intent intent = new Intent();
+            intent.putExtra("profileFile", file.getAbsoluteFile());
+            setResult(ProfileSettingsActivity.REQUEST_TAKE_PHOTO, intent);
             finish();
           } else {
-            ActivityUtils.startActivity(SelfieCompletedActivity.class);
+            Intent intent = new Intent(ActivityUtils.getTopActivity(), SelfieCompletedActivity.class);
+            intent.putExtra(AppConstants.KEY_OBJ, intentStringValue);
+            ActivityUtils.startActivity(intent);
           }
 
           break;
       }
     }
   };
+
 
   private ImageView mImgCaptured;
   private TextView mRetakeView;
@@ -107,6 +118,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_camera);
+    intentStringValue = getIntent().getStringExtra(AppConstants.KEY_OBJ);
     EventBus.getDefault().register(this);
     mCameraView = (CameraView) findViewById(R.id.camera);
     mImgCaptured = (ImageView) findViewById(R.id.imgCaptured);
@@ -128,6 +140,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
     }
     mRetakeView.setOnClickListener(mOnClickListener);
     mFinishView.setOnClickListener(mOnClickListener);
+
   }
 
   /**
@@ -138,10 +151,10 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
     if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
       mCameraView.start();
     } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-      ConfirmationDialogFragment.newInstance(R.string.camera_permission_confirmation, new String[] { Manifest.permission.CAMERA }, REQUEST_CAMERA_PERMISSION,
+      ConfirmationDialogFragment.newInstance(R.string.camera_permission_confirmation, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION,
           R.string.camera_permission_not_granted).show(getSupportFragmentManager(), FRAGMENT_DIALOG);
     } else {
-      ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA }, REQUEST_CAMERA_PERMISSION);
+      ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
     }
   }
 
@@ -184,6 +197,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
   /**
    * changes flash, ratio
+   *
    * @param item menu item
    * @return boolean
    */
@@ -217,7 +231,6 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
   @Override public void onAspectRatioSelected(@NonNull AspectRatio ratio) {
     if (mCameraView != null) {
-      Toast.makeText(this, ratio.toString(), Toast.LENGTH_SHORT).show();
       mCameraView.setAspectRatio(ratio);
     }
   }
@@ -244,7 +257,6 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
     @Override public void onPictureTaken(CameraView cameraView, final byte[] data) {
       Log.d(TAG, "onPictureTaken " + data.length);
-      Toast.makeText(cameraView.getContext(), R.string.picture_taken, Toast.LENGTH_SHORT).show();
       getBackgroundHandler().post(() -> {
         long random = System.currentTimeMillis();
         file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "picture_" + random + ".jpg");
@@ -271,6 +283,7 @@ public class CameraActivity extends AppCompatActivity implements ActivityCompat.
 
   /**
    * show image after image captured
+   *
    * @param file image file
    */
   private void showImage(File file) {

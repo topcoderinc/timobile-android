@@ -220,49 +220,50 @@
           />
 
       <RelativeLayout
+          android:id="@+id/additionalTask"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginLeft="@dimen/_10sdp"
           android:layout_marginRight="@dimen/_10sdp"
-          android:gravity="center_vertical"
-          >
+          android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/imgCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_camera"
-            />
+            android:src="@drawable/ic_camera" />
+
         <LinearLayout
 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_68sdp"
             android:layout_toRightOf="@id/imgCamera"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
           <TextView
+              style="@style/BoldFont"
+              android:id="@+id/additionalTaskName"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="@string/selfie_up"
               android:textColor="@color/dark_gray"
-              android:textSize="12sp"
-              style="@style/BoldFont"
-              />
+              android:textSize="12sp" />
 
           <TextView
+              android:id="@+id/additionalTaskDescription"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/_5sdp"
               android:text="@string/selfie_text"
               android:textColor="@color/dark_gray"
-              android:textSize="10sp"
-              />
+              android:textSize="10sp" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/tvRewardPoints"
+            style="@style/BoldFont"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -270,9 +271,7 @@
             android:drawablePadding="@dimen/_5sdp"
             android:textColor="@color/dark_gray"
             android:textSize="12sp"
-            tools:text="30 pts"
-            style="@style/BoldFont"
-            />
+            tools:text="30 pts" />
 
         <TextView
             android:id="@+id/tvTakeSelfie"
@@ -282,11 +281,11 @@
             android:layout_below="@id/tvRewardPoints"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/blue_border"
+
             android:padding="@dimen/_5sdp"
             android:text="@string/take_a_selfie"
             android:textColor="@color/blue_indicator"
-            android:textSize="12sp"
-            />
+            android:textSize="12sp" />
 
       </RelativeLayout>
       <View

@@ -3,13 +3,14 @@ apply plugin: 'com.android.application'
 android {
   compileSdkVersion 26
   buildToolsVersion '26.0.2'
-  final API_URL_DEV = "https://bookstore-mb.herokuapp.com/"
+  final API_URL_DEV = "https://polar-ti-mobile.herokuapp.com"
   defaultConfig {
     applicationId "com.topcoder.timobile"
     minSdkVersion 23
     targetSdkVersion 26
     versionCode 1
     versionName "1.0"
+    multiDexEnabled true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
   compileOptions {
@@ -113,5 +114,8 @@ dependencies {
   compile project(':cameraview')
   compile 'com.afollestad:easyvideoplayer:0.3.0'
   compile 'org.greenrobot:eventbus:3.0.0'
+  compile 'com.amazonaws:aws-android-sdk-core:2.6.14'
+  compile 'com.amazonaws:aws-android-sdk-s3:2.6.14'
+  compile 'com.amazonaws:aws-android-sdk-ddb:2.6.14'
   testCompile 'junit:junit:4.12'
 }

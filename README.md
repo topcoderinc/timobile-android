@@ -1,46 +1,8 @@
-## TiMobile Android App Prototype
-
-This is the prototype for the TiMobile Android App. This app is designed
-in a way that it will be straightforward to integrate with the Actual APIs.
+# TI Mobile Android App API Integration Challenge
 
 ### What is included in the submission
 
 The folder **TiMobile** contains the Android Studio project and can be imported directly into Android Studio.
-
-### Sections implemented
-
-Here is the complete list of sections which we have implemented
-
-- 0-WelcomeScreen(x)
-- 01_Login
-- 01_Pre-Story
-- 01_Story
-- 01_Story0
-- 1_Story1
-- 1_Story2
-- 2-Search
-- 03_Browse_Story
-- 03_Browse_Story_1
-- 03_Story_Content0
-- 03_Story_Content1-2
-- 04_Selfie
-- 04_Story_Completed
-- 04_Story_Completed1
-- 04_Story_Completed3
-- 05_Profile
-- 05_Profile0
-- 05_Profile1
-- 05_Profile2_2
-- 05_Profile2
-- 06_TI-Points
-- 06_TI-Points1
-- 07_Help
-- 08_Card-Shop
-- 09_Bookmark
-- 09_Bookmark-1 and 09_Bookmark_2
-- 09_Navigation
-- 05_Profile
-
 
 ### Dependencies
 
@@ -49,8 +11,6 @@ We have used
 - **Retrofit** and **RxJava** for Network
 - **Dagger** for dependency injection
 - **JAVA 8** via **RetroLambda**
-- We are loading mock data from JSON files. This can be easily swapped with the real API
- implementation
 
 To compile, you will need
 
@@ -74,7 +34,21 @@ For release build,
 
     $ ./gradlew assembleRelease installRelease
 
-The app starts on the login screen. you need to enter mock credentials that you can find below or in mockstring.xml file.
 
-e.g. Email abc@gmail.com password 123456
+## Account
 
+email : user0@test.com
+
+password : password
+
+
+
+## Note
+
+1. help page are all static content , so i keep the old content. https://apps.topcoder.com/forums/?module=Thread&threadID=911610&start=0
+2. stories apge order by distance backend didn't implent, so keep this. https://apps.topcoder.com/forums/?module=Thread&threadID=911494&start=0
+3. app request ACCESS_FINE_LOCATION and ACCESS_FINE_LOCATION permission, so user need allow permission twice.
+
+## Video
+
+<https://youtu.be/h_bo0KC93Go>

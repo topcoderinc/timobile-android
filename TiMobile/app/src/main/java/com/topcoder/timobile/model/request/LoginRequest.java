@@ -1,8 +1,13 @@
 package com.topcoder.timobile.model.request;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data public class LoginRequest {
+@Getter
+@Setter
+@ToString(exclude = {"password"})
+public class LoginRequest {
 
   private String email;
 

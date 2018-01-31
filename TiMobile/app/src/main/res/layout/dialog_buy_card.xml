@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.topcoder.timobile.customviews.roundimageview.RoundedImageView
+            android:id="@+id/imgReward"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_card_close"
+            app:riv_border_color="@color/card_border"
+            app:riv_border_width="@dimen/_2sdp"
+            app:riv_corner_radius="@dimen/_3sdp" />
+
+    </FrameLayout>
+
+    <TextView
+        style="@style/BoldFont"
+        android:id="@+id/tvCardTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Card Name Lorem Ipsum"
+        android:textColor="@color/heavy_orange"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvCardDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="3"
+        android:text="@string/dummy_text"
+        android:textColor="@color/dark_gray"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/divider" />
+
+    <TextView
+        android:id="@+id/tvRewardPoints"
+        style="@style/BoldFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:drawableLeft="@drawable/ic_points"
+        android:drawablePadding="@dimen/_5sdp"
+        android:text="30 pts"
+        android:textColor="@color/dark_gray"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/btnBuy"
+        style="@style/SemiBoldFont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:background="@color/blue_indicator"
+        android:text="PURCHASE"
+        android:textColor="@color/white" />
+
+</LinearLayout>

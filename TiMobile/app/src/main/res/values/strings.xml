@@ -30,9 +30,9 @@
   <string name="next">Next</string>
   <string name="finish">Finish</string>
   <string name="racetracks">RaceTracks</string>
-  <string name="dummy_text">Ut wisi enim ad aveniam quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea…</string>
+  <string name="dummy_text">N/A</string>
   <string name="keeneland_race_course">Keeneland Race Course</string>
-  <string name="story_title_lorem_ipsum_dolor_sit_amet">Story Title Lorem Ipsum Dolor Sit Amet</string>
+  <string name="story_title_lorem_ipsum_dolor_sit_amet">N/A</string>
   <string name="cancel">Cancel</string>
   <string name="please_wait">Please wait</string>
   <string name="ok">OK</string>
@@ -57,10 +57,6 @@
     <item quantity="other">%1$s cards</item>
   </plurals>
 
-  <plurals name="distance">
-    <item quantity="one">%1$s mile</item>
-    <item quantity="other">%1$s miles</item>
-  </plurals>
 
   <string name="read_more">Read More</string>
   <string name="read_less">Read Less</string>
@@ -75,9 +71,9 @@
   <string name="add_comment">Add Comment</string>
   <string name="post">Post</string>
   <string name="continue_story">Continue story</string>
-  <string name="earn_points">Wow! You have earned 30 pts by take a selfie\nin the location. Additional points have been\nadded automatically in your account.</string>
+  <string name="earn_points">Wow! You have earned %s pts by take a selfie\nin the location. Additional points have been\nadded automatically in your account.</string>
   <string name="congratulations">Congratulations!\nyou have completed the task</string>
-  <string name="congratulations_card">Congratulations!\nyou got 3 trading cards</string>
+  <string name="congratulations_card">Congratulations!\nyou got %d trading card</string>
   <string name="reward_card">Wow! You have unlocked Card Name Lorem,\nCard Name Lorem, and Card Name Lorem.\nCheck your trading card gallery for details!</string>
   <string name="back_to_story">Back to Story</string>
   <string name="main_menu">Main Menu</string>
@@ -88,18 +84,17 @@
   <string name="badges">Badges</string>
   <string name="share">Share</string>
   <string name="related_to">Related to:</string>
-  <string name="go_to_selected_chapter">Go to selected chapter</string>
+  <string name="go_to_selected_story">Go to selected story</string>
   <string name="redeem">Redeem</string>
   <string name="change_photo_profile">Change Photo Profile</string>
   <string name="profile_information">Profile Information</string>
-  <string name="third_party_news">Receive news about third-party deals\nto my mails.</string>
-  <string name="free_admission">Free admission to Win Star Farm\non your next visit.</string>
-  <string name="name">Name</string>
+  <string name="first_name">First Name</string>
+  <string name="second_name">Last Name</string>
   <string name="preference_setting">Preference Setting</string>
   <string name="order_by">Order by:</string>
   <string name="points_name_ascending"><![CDATA[Points & Name (Ascending)]]></string>
   <string name="faq">FAQ</string>
-  <string name="empty_string"/>
+  <string name="empty_string" />
   <string name="pick_image_intent_text">Pick Image</string>
 
   <string name="all_permissions_denied_feedback">All those permissions are needed for doing further stuff</string>
@@ -127,4 +122,23 @@
   <string name="achievements">Achievements</string>
   <string name="daily_tasks">Daily Tasks</string>
   <string name="info">Info</string>
+  <string name="rewardsReceived">Rewards received</string>
+  <string name="card_type_market">Market</string>
+  <string name="go_to_market">go to market</string>
+  <string name="your_first_name">Your first name</string>
+  <string name="your_last_name">Your last name</string>
+  <string name="your_email_address">Your email address</string>
+  <string name="change_password">Change password</string>
+  <string name="update_password">UPDATE PASSWORD</string>
+  <string name="old_password">Old password</string>
+  <string name="your_confirm_password">Your confirm password</string>
+  <string name="confirm_password">Confirm password</string>
+  <string name="new_password">New password</string>
+  <string name="your_new_password">Your new password</string>
+  <string name="change_passwod_title">Change Password</string>
+  <string name="your_forgot_password_token">Your forgot password token</string>
+  <string name="set_new_password">Set new password</string>
+  <string name="signup_new_password">New Password</string>
+  <string name="singup_dialog_content">Thank you for sign up, an email already send to your email box, please follow the email to verify your account</string>
+  <string name="map_story_tips">Displaying %d of %d stories in this area</string>
 </resources>
