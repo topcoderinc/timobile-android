@@ -146,15 +146,17 @@ public class ApiServiceImpl implements ApiService {
    * @param tagIds      the tags ids
    * @param offset      the offset
    * @param limit       the limit
+   * @param locationLat the locationLat
+   * @param locationLng the locationLng
    * @param sortColumn  the sort name
    * @param sortOrder   the sort order
    * @return the stories with page information
    */
   @Override public Observable<PageResult<TrackStory>> getTrackStories(
       String title, Long racetrackId, String racetrackIds, String tagIds,
-      int offset, int limit, String sortColumn, String sortOrder) {
+      int offset, int limit, Float locationLat, Float locationLng, String sortColumn, String sortOrder) {
     return schedule(apiService.getTrackStories(title, racetrackId, racetrackIds,
-        tagIds, offset, limit, sortColumn, sortOrder))
+        tagIds, offset, limit, locationLat, locationLng, sortColumn, sortOrder))
         .doOnNext(trackStoryPageResult -> this.trackStoryPageResult = trackStoryPageResult);
   }
 

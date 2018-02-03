@@ -243,7 +243,7 @@ public class AppUtils {
     Location location = new Location(LocationManager.GPS_PROVIDER);
     location.setLatitude(lat);
     location.setLongitude(lng);
-    float distance = AppUtils.getCurrentLocation().distanceTo(location);
+    float distance = AppUtils.getCurrentLocation().distanceTo(location) * 0.000621371f; // to miles
     String suffix = "";
     if (distance > 1000) {
       distance = distance / 1000;
