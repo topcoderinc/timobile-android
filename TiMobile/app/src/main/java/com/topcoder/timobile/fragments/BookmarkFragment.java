@@ -111,7 +111,7 @@ public class BookmarkFragment extends BaseFragment {
     }
 
     apiService.getTrackStories(null, null, racetrackIds, null, offset,
-        AppConstants.DEFAULT_LIMIT, null, null)
+        AppConstants.DEFAULT_LIMIT, null, null, "title", "ASC")
         .subscribe(this::onSuccess, throwable -> {
           loadMore.loadedDone();
           this.onError(throwable);

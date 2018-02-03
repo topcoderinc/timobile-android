@@ -31,14 +31,14 @@ public interface AppConstants {
   String TOKEN_KEY = "TOKEN_KEY";
 
   /**
-   * every 5 seconds to fetch current location
+   * every 60 seconds to fetch current location
    */
-  long LOCATION_REFRESH_TIME = 5000;
+  long LOCATION_REFRESH_TIME = 60*1000;
 
   /**
    * refresh location if distance > 200
    */
-  float LOCATION_REFRESH_DISTANCE = 200;
+  float LOCATION_REFRESH_DISTANCE = 500;
 
   /**
    * the page default size

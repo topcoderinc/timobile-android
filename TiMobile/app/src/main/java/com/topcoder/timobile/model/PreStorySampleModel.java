@@ -14,6 +14,11 @@ public class PreStorySampleModel {
   protected String name;
   protected boolean isCheck;
 
+  public PreStorySampleModel(){}
+  public PreStorySampleModel(String value , String name) {
+    this.value = value;
+    this.name = name;
+  }
 
   public String getValue() {
     if (this.value == null) return this.name;

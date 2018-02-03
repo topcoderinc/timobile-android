@@ -67,6 +67,7 @@ public interface ApiService {
       @Query("title") String title, @Query("racetrackId") Long racetrackId,
       @Query("racetrackIds") String racetrackIds, @Query("tagIds") String tagIds,
       @Query("offset") int offset, @Query("limit") int limit,
+      @Query("locationLat") Float locationLat, @Query("locationLng") Float locationLng,
       @Query("sortColumn") String sortColumn, @Query("sortOrder") String sortOrder);
 
   @GET("api/v1/trackStories/{id}")

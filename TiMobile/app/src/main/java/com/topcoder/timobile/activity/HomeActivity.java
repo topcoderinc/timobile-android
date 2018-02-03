@@ -299,6 +299,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
       Log.d(TAG, "onLocationChanged: new Location = " + location);
       AppUtils.setCurrentLocation(location);
       EventBus.getDefault().post(new LocationUpdatedEvent());
+      mLocationManager.removeUpdates(mLocationListener);
     }
 
     @Override public void onStatusChanged(String s, int i, Bundle bundle) {

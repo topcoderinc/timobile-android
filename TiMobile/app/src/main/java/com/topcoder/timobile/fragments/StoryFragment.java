@@ -80,6 +80,8 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
   @BindView(R.id.linearTile) LinearLayout linearTile;
   @BindView(R.id.imgDown) ImageView imgDown;
   @BindView(R.id.tvStoryTips) TextView tvStoryTips;
+  @BindView(R.id.tvSortBy) TextView tvSortBy;
+
   Unbinder unbinder;
   private List<PreStorySampleModel> preStorySampleModels = new ArrayList<>();
   private PreStoryListAdapter raceTrackAdapter;
@@ -148,9 +150,15 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
     Location location = AppUtils.getCurrentLocation();
     Float lat = location == null ? null : ((float) location.getLatitude());
     Float lng = location == null ? null : ((float) location.getLongitude());
+    String sortName = "name";
+    String sortOrder = "ASC";
+    if (lat != null) {
+      sortName = "distance";
+      sortOrder = "DESC";
+    }
     apiService.getRacetracks(null, null,
         AppConstants.SEARCH_RACETRACKS_DISTANCE_IN_M, lat, lng, offset, AppConstants.DEFAULT_LIMIT,
-        "name", "asc")
+        sortName, sortOrder)
         .subscribe(this::onTrackSuccess, this::onTrackError);
   }
 
@@ -166,8 +174,22 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
       storyModelList.clear();
       bottomTileHolder.hide();
     }
+
+    String sortColumn = "title";
+    String sortOrder = "ASC";
+    Float locationLat = null;
+    Float locationLng = null;
+    tvSortBy.setText("Title");
+    if (AppUtils.getCurrentLocation() != null) {
+      sortColumn = "distance";
+      sortOrder = "ASC";
+      tvSortBy.setText("Nearest");
+      locationLat = (float) AppUtils.getCurrentLocation().getLatitude();
+      locationLng = (float) AppUtils.getCurrentLocation().getLongitude();
+    }
     apiService.getTrackStories(filterSearchString, null, filterRacetrackIds,
-        null, offset, AppConstants.DEFAULT_LIMIT, null, null)
+        null, offset, AppConstants.DEFAULT_LIMIT,
+        locationLat, locationLng, sortColumn, sortOrder)
         .subscribe(storyPageResult -> {
               loadMore.loadedDone();
               this.onSuccess(storyPageResult, needClear);
@@ -220,6 +242,7 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
   }
 
   private void onTrackSuccess(PageResult<PreStorySampleModel> pageResult) {
+    preStorySampleModels.clear();
     PreStorySampleModel storySampleModel = new PreStorySampleModel();
     storySampleModel.setId(0);
     storySampleModel.setValue("All Racetracks");
@@ -390,6 +413,8 @@ public class StoryFragment extends BaseFragment implements BaseRecyclerAdapter.R
    */
   @Subscribe public void onLocationUpdated(LocationUpdatedEvent event) {
     storyAdapter.notifyDataSetChanged();
+    fetchStories(true);
+    fetchRacetracks();
     if (!isList) {
       initMarker();
     }
